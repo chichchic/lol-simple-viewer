@@ -6,10 +6,11 @@ import Button from './Button';
 import './SearchBar.scss';
 
 export default function SearchBar({ onClick = () => {} }) {
-  const [inputValue, changeInputValue] = useState('');
+  const initInputValue = '';
+  const [inputValue, changeInputValue] = useState(initInputValue);
   function onClickButton() {
     onClick(inputValue);
-    changeInputValue('');
+    changeInputValue(initInputValue);
   }
   return (
     <div className="search-bar">
