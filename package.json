@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/user-event": "^12.1.10",
     "http-proxy-middleware": "^1.0.6",
+    "jest-styled-components": "^7.0.3",
     "node-sass": "4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -20,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "eslintConfig": {
     "extends": [
@@ -41,7 +43,14 @@
     ]
   },
   "devDependencies": {
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.4.0",
-    "enzyme": "^3.11.0"
+    "@storybook/addon-a11y": "^6.1.11",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/preset-scss": "^1.0.3",
+    "@storybook/react": "^6.1.11",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
+    "css-loader": "^5.0.1",
+    "enzyme": "^3.11.0",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0"
   }
 }
