@@ -1,0 +1,12 @@
+.search-bar {
+  height: 4rem;
+  width: 40rem;
+  display: flex;
+  &--input {
+    height: inherit;
+    margin-right: 1rem;
+    flex: 1;
+    outline: none;
+    padding: 0 1rem;
+  }
+}
