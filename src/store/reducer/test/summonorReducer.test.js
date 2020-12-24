@@ -2,7 +2,7 @@ import reducer from '../summonor';
 
 import { setSummonorInfo, getSummonorInfo } from '../../action/summonor';
 
-describe('summonor', () => {
+describe('summonor reducer', () => {
   it('setSummonorInfo', () => {
     const testState = {
       test: 'test',

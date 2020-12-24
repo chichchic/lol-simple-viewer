@@ -29,3 +29,5 @@ function fetchJsonUrl(type) {
       });
   });
 }
+
+//TODO: 어떻게 Body.json()을 테스트 할 수 있는지 모르겠어서 test case를 만들지 못함
