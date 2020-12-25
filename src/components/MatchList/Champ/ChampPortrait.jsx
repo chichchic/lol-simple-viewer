@@ -7,7 +7,7 @@ import ImgComponent from '../../common/ImgComponent';
 const champImgUrl =
   'http://ddragon.leagueoflegends.com/cdn/10.25.1/img/champion/';
 
-export default function ChampPortrait({ champNum }) {
+export default function ChampPortrait({ champNum, level }) {
   const champRune = useSelector((state) => state.json.champion.data);
   const champData = {};
   if (!champRune) return <div>Loading</div>;
@@ -22,10 +22,12 @@ export default function ChampPortrait({ champNum }) {
   return (
     <div>
       <ImgComponent {...champData[champNum]} className="champPortrait" />
+      <span>{level}</span>
     </div>
   );
 }
 
 ChampPortrait.propTypes = {
   champNum: PropTypes.number.isRequired,
+  level: PropTypes.number.isRequired,
 };
