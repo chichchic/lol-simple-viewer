@@ -8,14 +8,14 @@ const champImgUrl =
   'http://ddragon.leagueoflegends.com/cdn/10.25.1/img/champion/';
 
 export default function ChampPortrait({ championId, champLevel }) {
-  const champRune = useSelector((state) => state.json.champion.data);
+  const champJson = useSelector((state) => state.json.champion.data);
   const champData = {};
-  if (!champRune) return <div>Loading</div>;
-  for (const key in champRune) {
-    if (Object.hasOwnProperty.call(champRune, key)) {
-      champData[champRune[key].key] = {
-        src: champImgUrl + champRune[key].image.full,
-        alt: champRune[key].id,
+  if (!champJson) return <div>Loading</div>;
+  for (const key in champJson) {
+    if (Object.hasOwnProperty.call(champJson, key)) {
+      champData[champJson[key].key] = {
+        src: champImgUrl + champJson[key].image.full,
+        alt: champJson[key].id,
       };
     }
   }
