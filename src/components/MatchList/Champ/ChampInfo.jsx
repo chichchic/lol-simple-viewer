@@ -4,18 +4,33 @@ import ChampRune from './ChampRune';
 import ChampSpell from './ChampSpell';
 import ChampPortrait from './ChampPortrait';
 import ChampScoreBox from './ChampScoreBox';
-export default function ChampInfo() {
+export default function ChampInfo({
+  firstSpellNum,
+  secondSpellNum,
+  firstRuneNum,
+  secondRuneNum,
+  championId,
+  champLevel,
+  kills,
+  deaths,
+  assists,
+  goldEarned,
+  totalKill,
+}) {
   return (
     <article className="champ-info">
-      <ChampSpell firstSpellNum={4} secondSpellNum={32} />
-      <ChampRune firstRuneNum={8437} secondRuneNum={8000} />
-      <ChampPortrait championId={12} level={18} />
+      <ChampSpell
+        firstSpellNum={firstSpellNum}
+        secondSpellNum={secondSpellNum}
+      />
+      <ChampRune firstRuneNum={firstRuneNum} secondRuneNum={secondRuneNum} />
+      <ChampPortrait championId={championId} champLevel={champLevel} />
       <ChampScoreBox
-        kills={3}
-        deaths={3}
-        assists={3}
-        goldEarned={300}
-        totalKill={7}
+        kills={kills}
+        deaths={deaths}
+        assists={assists}
+        goldEarned={goldEarned}
+        totalKill={totalKill}
       />
     </article>
   );
