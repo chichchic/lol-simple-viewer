@@ -10,13 +10,13 @@ export default function ChampRune({ firstRuneNum, secondRuneNum }) {
   const runeData = {};
   runeJson.forEach((pVal) => {
     runeData[pVal.id] = {
-      src: `./img/${pVal.icon}`,
+      src: `../img/${pVal.icon}`,
       alt: pVal.name,
     };
     pVal.slots.forEach(({ runes }) => {
       runes.forEach(({ id, icon, name }) => {
         runeData[id] = {
-          src: `./img/${icon}`,
+          src: `../img/${icon}`,
           alt: name,
         };
       });

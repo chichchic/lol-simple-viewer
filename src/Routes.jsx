@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Main from './views/Main/Main';
+import MatchList from './views/MatchList/MatchList';
 
 class Routes extends React.Component {
   render() {
@@ -9,6 +10,7 @@ class Routes extends React.Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Main} />
+          <Route exact path="/match-list/:name" component={MatchList} />
         </Switch>
       </Router>
     );

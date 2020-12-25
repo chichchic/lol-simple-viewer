@@ -12,7 +12,7 @@ export default function Item({ itemNum, className }) {
   if (itemNum < 0) {
     return (
       <div className={className}>
-        <ImgComponent src="./img/blank.png" alt="empty" className="empty" />
+        <ImgComponent src="../img/blank.png" alt="empty" className="empty" />
       </div>
     );
   }
