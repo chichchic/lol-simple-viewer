@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import summonor from './summonor';
+import summoner from './summoner';
 import json from './json';
 
 const rootReducer = combineReducers({
-  summonor,
+  summoner,
   json,
 });
 

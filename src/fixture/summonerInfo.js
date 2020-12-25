@@ -1,4 +1,4 @@
-const summonorInfo = {
+const summonerInfo = {
   id: null,
   accountId: null,
   puuid: null,
@@ -8,4 +8,4 @@ const summonorInfo = {
   summonerLevel: null,
 };
 
-export default summonorInfo;
+export default summonerInfo;

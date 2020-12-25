@@ -5,7 +5,7 @@ import { setJson, getJson } from '../../action/json';
 import jsonTypes from '../../../fixture/jsonType';
 
 describe('json reducer', () => {
-  it('setSummonorInfo', () => {
+  it('setsummonerInfo', () => {
     const initJson = {};
     jsonTypes.forEach((val) => {
       initJson[val] = false;

@@ -1,15 +1,15 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { setSummonorInfo, getSummonorInfo } from '../summonor';
-import summonorInfo from '../../../fixture/summonorInfo';
+import { setsummonerInfo, getsummonerInfo } from '../summoner';
+import summonerInfo from '../../../fixture/summonerInfo';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-describe('summonor action', () => {
+describe('summoner action', () => {
   beforeEach(function () {
-    const mockSuccessResoponse = summonorInfo;
+    const mockSuccessResoponse = summonerInfo;
     const mockJsonPromise = Promise.resolve(mockSuccessResoponse);
     const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
     jest.spyOn(global, 'fetch').mockImplementation(() => {
@@ -21,8 +21,8 @@ describe('summonor action', () => {
   });
   it('getSummonoInfo', async () => {
     const store = mockStore({});
-    await store.dispatch(getSummonorInfo('name'));
+    await store.dispatch(getsummonerInfo('name'));
     const actions = store.getActions();
-    expect(actions[0]).toEqual(setSummonorInfo(summonorInfo));
+    expect(actions[0]).toEqual(setsummonerInfo(summonerInfo));
   });
 });

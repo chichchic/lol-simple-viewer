@@ -35,6 +35,6 @@ export default function ItemBox({ itemArray }) {
   );
 }
 
-ItemBox.prototype = {
+ItemBox.propTypes = {
   itemArray: PropTypes.array.isRequired,
 };

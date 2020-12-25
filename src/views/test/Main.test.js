@@ -11,7 +11,7 @@ import Main from '../Main/Main';
 import SearchBar from '../../components/common/SearchBar';
 import TextLink from '../../components/common/TextLink';
 
-import summonorInfo from '../../fixture/summonorInfo';
+import summonerInfo from '../../fixture/summonerInfo';
 
 jest.mock('react-redux');
 jest.mock('react-router-dom');
@@ -61,7 +61,7 @@ describe('search by name', () => {
     setImmediate(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(push).toHaveBeenCalledTimes(1);
-      expect(push).toHaveBeenCalledWith('/list');
+      expect(push).toHaveBeenCalledWith('/match-list');
       done();
     });
   });
