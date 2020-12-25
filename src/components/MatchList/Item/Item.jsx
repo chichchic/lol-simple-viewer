@@ -9,7 +9,7 @@ const itemImgUrl = 'http://ddragon.leagueoflegends.com/cdn/10.25.1/img/item/';
 export default function Item({ itemNum, className }) {
   const itemJson = useSelector((state) => state.json.item.data);
   if (!itemJson) return <div>Loading</div>;
-  if (itemNum < 0) {
+  if (itemNum == 0) {
     return (
       <div className={className}>
         <ImgComponent src="../img/blank.png" alt="empty" className="empty" />

@@ -9,10 +9,6 @@ function makeItemBox(itemArray) {
   const componentArr = [];
   let hasTrinket = false;
   for (let i = 0; i < 7; i++) {
-    if (i >= itemArray.length) {
-      componentArr.push(-1);
-      continue;
-    }
     if (trinketList.includes(itemArray[i])) {
       hasTrinket = itemArray[i];
     } else {
