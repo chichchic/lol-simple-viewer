@@ -3,8 +3,9 @@
     display: flex;
     justify-content: space-between;
     padding: 1rem 2rem;
+    margin-bottom: 10rem;
   }
-  & .content {
+  & > .content {
     display: flex;
     justify-content: center;
   }

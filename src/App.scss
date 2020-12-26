@@ -20,6 +20,12 @@ body {
   background-color: #abcee9;
 }
 
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
 .ellipsis {
   text-overflow: ellipsis;
 
