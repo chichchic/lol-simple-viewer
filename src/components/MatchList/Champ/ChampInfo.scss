@@ -1,0 +1,7 @@
+.champ-info {
+  display: flex;
+
+  & > article:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+}

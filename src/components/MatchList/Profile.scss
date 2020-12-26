@@ -1,0 +1,21 @@
+.profile {
+  padding: 1rem 3rem;
+  width: 50rem;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  & img {
+    width: 8rem;
+    height: 8rem;
+  }
+  & .info {
+    margin-left: 3rem;
+    & .name {
+      font-size: 5rem;
+      font-weight: bold;
+    }
+    & .level {
+      font-size: 3rem;
+    }
+  }
+}

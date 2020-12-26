@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 
 import ImgComponent from '../../common/ImgComponent';
 
+import './ChampPortrait.scss';
+
 const champImgUrl =
   'http://ddragon.leagueoflegends.com/cdn/10.25.1/img/champion/';
 
@@ -20,10 +22,10 @@ export default function ChampPortrait({ championId, champLevel }) {
     }
   }
   return (
-    <div>
-      <ImgComponent {...champData[championId]} className="champPortrait" />
-      {champLevel && <span>{champLevel}</span>}
-    </div>
+    <article className="champ-portriat-component">
+      {champLevel && <div className="champ-level">{champLevel}</div>}
+      <ImgComponent {...champData[championId]} className="champ-portrait" />
+    </article>
   );
 }
 

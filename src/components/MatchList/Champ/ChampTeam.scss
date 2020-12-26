@@ -1,0 +1,15 @@
+.champ-team {
+  width: 9rem;
+  & .content {
+    display: flex;
+    & .summoner-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  & img {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './ChampScoreBox.scss';
+
 export default function ChampScoreBox({
   kills,
   deaths,
@@ -9,10 +11,12 @@ export default function ChampScoreBox({
   totalKill,
 }) {
   return (
-    <div>
+    <article className="champ-score-box">
       <div className="kda">
         <span className="kill">{kills}</span>
+        <span className="division">&nbsp;/&nbsp;</span>
         <span className="death">{deaths}</span>
+        <span className="division">&nbsp;/&nbsp;</span>
         <span className="assist">{assists}</span>
       </div>
       <div className="ka-ratio">
@@ -25,7 +29,7 @@ export default function ChampScoreBox({
       <div className="cs">
         Total Gold:&nbsp;<span className="gold">{goldEarned}</span>
       </div>
-    </div>
+    </article>
   );
 }
 

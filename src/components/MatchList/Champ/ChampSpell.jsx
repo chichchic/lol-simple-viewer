@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 
 import ImgComponent from '../../common/ImgComponent';
 
+import './ChampSpell.scss';
+
 function makeSpellProps(spellJson, spellNum) {
   for (const key in spellJson.data) {
     if (Object.hasOwnProperty.call(spellJson.data, key)) {
@@ -21,7 +23,7 @@ export default function ChampSpell({ firstSpellNum, secondSpellNum }) {
   const spellJson = useSelector((state) => state.json.summoner);
   if (spellJson) {
     return (
-      <div>
+      <article className="champ-spell">
         <ImgComponent
           {...makeSpellProps(spellJson, firstSpellNum)}
           className="first-spell"
@@ -30,7 +32,7 @@ export default function ChampSpell({ firstSpellNum, secondSpellNum }) {
           {...makeSpellProps(spellJson, secondSpellNum)}
           className="first-spell"
         />
-      </div>
+      </article>
     );
   }
   return <div>Loading</div>;

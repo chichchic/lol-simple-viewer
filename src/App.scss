@@ -9,14 +9,15 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%; // 10px/16px = 62.5% -> 1rem = 10px;
-  // overflow: hidden;
   width: 100vw;
   overflow-x: hidden;
+  font-family: 'Helvetica Neue', Helvetica, 'Apple SD Gothic Neo', AppleGothic,
+    Dotum;
 }
 
 body {
   // max-width: 156.7rem;
-  background-color: '#f9f9f9';
+  background-color: #abcee9;
 }
 
 .ellipsis {

@@ -4,6 +4,8 @@ import ChampRune from './ChampRune';
 import ChampSpell from './ChampSpell';
 import ChampPortrait from './ChampPortrait';
 import ChampScoreBox from './ChampScoreBox';
+
+import './ChampInfo.scss';
 export default function ChampInfo({
   firstSpellNum,
   secondSpellNum,

@@ -1,0 +1,31 @@
+.rank {
+  width: 40rem;
+  & .box {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border: gray 1px solid;
+    padding: 1rem 0.5rem;
+    & .info {
+      margin-left: 2rem;
+      & > div:not(:last-child) {
+        margin-bottom: 0.3rem;
+      }
+      & .queue-type {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      & .score {
+        display: flex;
+        & > div:not(.divison) {
+          font-size: 1rem;
+          font-weight: bold;
+        }
+      }
+    }
+    & img {
+      width: 7rem;
+      height: 7rem;
+    }
+  }
+}

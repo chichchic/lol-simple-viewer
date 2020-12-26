@@ -1,0 +1,21 @@
+.match-list {
+  & .top-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+  }
+  & .content {
+    display: flex;
+    justify-content: center;
+  }
+  & .info-list {
+    width: 50rem;
+    & .show-more-btn {
+      border: none;
+      display: block;
+      padding: 1rem 0;
+      width: 100%;
+      font-size: 2rem;
+    }
+  }
+}

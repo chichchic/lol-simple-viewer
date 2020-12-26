@@ -1,0 +1,20 @@
+.champ-portriat-component {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  & .champ-level {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 3rem;
+    background-color: black;
+    clip-path: polygon(25% 18%, 75% 18%, 100% 50%, 75% 82%, 25% 82%, 0% 50%);
+    color: white;
+    padding: 0.3rem 0;
+    & + .champ-portrait {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+}

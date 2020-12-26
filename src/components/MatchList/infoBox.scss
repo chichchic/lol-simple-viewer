@@ -1,0 +1,12 @@
+.info-box {
+  display: flex;
+  align-items: center;
+  flex-basis: auto;
+  padding: 0.5rem 0.5rem;
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+  & > article:not(:last-child) {
+    margin-right: 1rem;
+  }
+}

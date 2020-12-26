@@ -1,0 +1,28 @@
+.champ-score-box {
+  font-weight: bold;
+  text-align: center;
+  & .kda {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    & .kill {
+      color: #333333;
+    }
+    & .death {
+      color: red;
+    }
+    & .assist {
+      color: #333333;
+    }
+  }
+  & .ka-ratio {
+    margin-bottom: 0.5rem;
+    & .ka-ratio-score {
+      color: #333333;
+    }
+  }
+  & .cs {
+    & .gold {
+      color: rgb(237, 223, 79);
+    }
+  }
+}
