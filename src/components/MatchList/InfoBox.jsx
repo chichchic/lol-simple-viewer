@@ -21,7 +21,6 @@ const initChmpInfo = {
   totalKill: 0,
 };
 function makeTeam(identities, participants, name) {
-  let isBlueTeamWin = false;
   let amIWin = false;
   const blueTeam = [];
   const redTeam = [];
@@ -73,7 +72,6 @@ function makeTeam(identities, participants, name) {
         };
       }
       if (teamId === 100) {
-        isBlueTeamWin = win;
         blueTeam.push({
           championId,
           summonerName,
@@ -87,7 +85,7 @@ function makeTeam(identities, participants, name) {
     },
   );
   champInfo.totalKill = totalKill;
-  return [blueTeam, redTeam, itemBox, champInfo, amIWin, isBlueTeamWin];
+  return [blueTeam, redTeam, itemBox, champInfo, amIWin];
 }
 
 export default function InfoBox({
@@ -97,16 +95,13 @@ export default function InfoBox({
   participants,
 }) {
   const { name } = useParams();
-  const [
-    blueTeam,
-    redTeam,
-    itemBox,
-    champInfo,
-    amIWin,
-    isBlueTeamWin,
-  ] = makeTeam(participantIdentities, participants, name);
+  const [blueTeam, redTeam, itemBox, champInfo, amIWin] = makeTeam(
+    participantIdentities,
+    participants,
+    name,
+  );
   return (
-    <article className="info-box">
+    <article className="info-box" style={amIWin ? isWin : isLose}>
       <ChampInfo {...champInfo} />
       <ItemBox itemArray={itemBox} />
       <ChampTeam teamInfo={blueTeam} />
@@ -114,3 +109,10 @@ export default function InfoBox({
     </article>
   );
 }
+
+const isWin = {
+  backgroundColor: '#3388ff',
+};
+const isLose = {
+  backgroundColor: '#ff88aa',
+};
