@@ -9,4 +9,9 @@
   & > article:not(:last-child) {
     margin-right: 1rem;
   }
+  & .play-btn {
+    font-size: 2rem;
+    background-color: inherit;
+    margin-left: auto;
+  }
 }

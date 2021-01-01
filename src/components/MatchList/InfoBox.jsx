@@ -1,11 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import ChampInfo from './Champ/ChampInfo';
 import ChampTeam from './Champ/ChampTeam';
 import ItemBox from './Item/ItemBox';
 
 import './infoBox.scss';
+import { AiFillPlayCircle } from 'react-icons/ai';
 
 const initChmpInfo = {
   firstSpellNum: 0,
@@ -94,6 +95,7 @@ export default function InfoBox({
   participantIdentities,
   participants,
 }) {
+  const history = useHistory();
   const { name } = useParams();
   const [blueTeam, redTeam, itemBox, champInfo, amIWin] = makeTeam(
     participantIdentities,
@@ -106,6 +108,12 @@ export default function InfoBox({
       <ItemBox itemArray={itemBox} />
       <ChampTeam teamInfo={blueTeam} />
       <ChampTeam teamInfo={redTeam} />
+      <button
+        className="play-btn"
+        onClick={() => history.push('/time-line/' + gameId)}
+      >
+        <AiFillPlayCircle />
+      </button>
     </article>
   );
 }
