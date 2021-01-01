@@ -27,7 +27,7 @@ export default function ChampScoreBox({
         %
       </div>
       <div className="cs">
-        Total Gold:&nbsp;<span className="gold">{goldEarned}</span>
+        Gold:&nbsp;<span className="gold">{goldEarned}</span>
       </div>
     </article>
   );
