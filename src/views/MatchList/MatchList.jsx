@@ -11,38 +11,17 @@ import Rank from '../../components/MatchList/Rank';
 import './MatchList.scss';
 
 import { getJson } from '../../store/action/json';
-
-const matchlistUrl = '/lol/match/v4/matchlists/by-account/';
-const gettingListNum = 5;
-
-async function getsummonerInfo(name) {
-  const res = await fetch(`/lol/summoner/v4/summoners/by-name/${name}`, {
-    method: 'GET',
-    headers: {
-      'Accept-Charset': 'application/x-www-form-urlencoded; charset=UTF-8',
-      'X-Riot-Token': process.env.REACT_APP_LOL_API,
-    },
-  });
-  const summonerInfo = await res.json();
-  return summonerInfo;
-}
-
-async function getLeagueInfo(id) {
-  const res = await fetch(`/lol/league/v4/entries/by-summoner/${id}`, {
-    method: 'GET',
-    headers: {
-      'Accept-Charset': 'application/x-www-form-urlencoded; charset=UTF-8',
-      'X-Riot-Token': process.env.REACT_APP_LOL_API,
-    },
-  });
-  const leagueInfo = await res.json();
-  return leagueInfo;
-}
+import {
+  getsummonerInfo,
+  getLeagueInfo,
+  getmatchList,
+} from '../../fixture/getInfoFuncs.js';
 
 export default function MatchList() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { name } = useParams();
+  const gettingListNum = 5;
 
   function searchsummoner(inputVal) {
     //reset init data
@@ -56,6 +35,7 @@ export default function MatchList() {
   const [level, setLevel] = useState(null);
   const [leagueInfo, setLeagueInfo] = useState(null);
   function mergeGameIdList(newArr) {
+    console.log(newArr);
     setgameIdList((oldArr) => [...oldArr, ...newArr]);
   }
   useEffect(() => {
@@ -89,22 +69,16 @@ export default function MatchList() {
   }, [dispatch, name]);
 
   useEffect(() => {
-    async function getmatchList(gameListIdx) {
-      let url =
-        matchlistUrl +
-        account +
-        `?beginIndex=${gameListIdx}&endIndex=${gameListIdx + gettingListNum}`;
-      const req = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Accept-Charset': 'application/x-www-form-urlencoded; charset=UTF-8',
-          'X-Riot-Token': process.env.REACT_APP_LOL_API,
-        },
-      });
-      const { matches } = await req.json();
-      mergeGameIdList(matches);
+    if (account) {
+      (async () => {
+        const matches = await getmatchList(
+          gameListIdx,
+          account,
+          gettingListNum,
+        );
+        mergeGameIdList(matches);
+      })();
     }
-    if (account) getmatchList(gameListIdx);
   }, [gameListIdx, account]);
 
   return (
