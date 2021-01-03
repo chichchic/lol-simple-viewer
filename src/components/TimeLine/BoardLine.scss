@@ -1,0 +1,34 @@
+.board-line {
+  display: flex;
+  align-items: center;
+  width: 30rem;
+  background-color: #333333;
+  padding: 12px 0;
+  border: gold 1px solid;
+  & .killed-text {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+  }
+  & .timestamp {
+    width: 5rem;
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+  }
+  & .board-portrait {
+    display: flex;
+    justify-content: center;
+    flex: 3;
+  }
+  & img {
+    border: 3px solid;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    background-color: white;
+  }
+}
