@@ -10,14 +10,11 @@ function minsec(timestamp) {
   return `${min}분 ${sec}초`;
 }
 
-function champImage(championId) {
-  if (championId === 0) {
+function champImage(championId, id) {
+  if (id === 0) {
     return (
       <div className="board-portrait">
-        <img
-          src="http://ddragon.leagueoflegends.com/cdn/10.25.1/img/profileicon/13.png"
-          alt="minion"
-        />
+        <img src="../../img/Turret.jpg" alt="turret" />
       </div>
     );
   } else {
@@ -96,9 +93,9 @@ export default function BoardLine({ event, participantChamps, timestamp }) {
       return (
         <div key={key} className="board-line">
           <div className="timestamp">{minsec(timestamp)}</div>
-          {champImage(killerId)}
+          {champImage(participantChamps[killerId], killerId)}
           <div className="killed-text">Killed</div>
-          {champImage(victimId)}
+          {champImage(participantChamps[victimId], victimId)}
         </div>
       );
     } else if (key === 'ELITE_MONSTER_KILL') {
@@ -111,9 +108,7 @@ export default function BoardLine({ event, participantChamps, timestamp }) {
         </div>
       );
     } else if (key === 'BUILDING_KILL') {
-      const { killerId, buildingType, laneType, teamId, towerType } = event[
-        key
-      ];
+      const { buildingType, teamId } = event[key];
       return (
         <div key={key} className="board-line">
           <div className="timestamp">{minsec(timestamp)}</div>

@@ -21,5 +21,5 @@ export default function Board({ eventLogs, participantChamps, curTime }) {
     }
     return eventLine;
   }
-  return <article class="board">{showBoadLine()}</article>;
+  return <article className="board">{showBoadLine()}</article>;
 }
