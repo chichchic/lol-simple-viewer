@@ -14,3 +14,14 @@
     height: 2rem;
   }
 }
+
+.horizontal {
+  & .trinket {
+    grid-column: 4/4;
+    grid-row: 1/-1;
+  }
+  & img {
+    width: 2rem;
+    height: 2rem;
+  }
+}

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Item from './Item';
 
 import './ItemBox.scss';
-const trinketList = [2052, 3340, 3363, 3364];
+import { trinketList } from '../../../fixture/itemList';
 
 function makeItemBox(itemArray) {
   const componentArr = [];
@@ -22,9 +22,9 @@ function makeItemBox(itemArray) {
   return componentArr;
 }
 
-export default function ItemBox({ itemArray }) {
+export default function ItemBox({ itemArray, grid }) {
   return (
-    <article className="item-box">
+    <article className={grid ? 'item-box' : 'horizontal'}>
       {makeItemBox(itemArray).map((itemNum, idx) => (
         <Item
           key={idx}

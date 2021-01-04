@@ -105,7 +105,7 @@ export default function InfoBox({
   return (
     <article className="info-box" style={amIWin ? isWin : isLose}>
       <ChampInfo {...champInfo} />
-      <ItemBox itemArray={itemBox} />
+      <ItemBox itemArray={itemBox} grid={true} />
       <ChampTeam teamInfo={blueTeam} />
       <ChampTeam teamInfo={redTeam} />
       <button
