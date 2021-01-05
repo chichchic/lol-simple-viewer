@@ -9,7 +9,14 @@ import './ChampPortrait.scss';
 const champImgUrl =
   'http://ddragon.leagueoflegends.com/cdn/10.25.1/img/champion/';
 
-export default function ChampPortrait({ championId, champLevel }) {
+export default function ChampPortrait({
+  championId,
+  champLevel,
+  className,
+  left = 0,
+  top = 0,
+  borderColor,
+}) {
   const champJson = useSelector((state) => state.json.champion.data);
   const champData = {};
   if (!champJson) return <div>Loading</div>;
@@ -22,9 +29,16 @@ export default function ChampPortrait({ championId, champLevel }) {
     }
   }
   return (
-    <article className="champ-portriat-component">
+    <article
+      className={className || 'champ-portriat-component'}
+      style={{ left, top }}
+    >
       {champLevel && <div className="champ-level">{champLevel}</div>}
-      <ImgComponent {...champData[championId]} className="champ-portrait" />
+      <ImgComponent
+        {...champData[championId]}
+        className="champ-portrait"
+        borderColor={borderColor}
+      />
     </article>
   );
 }
