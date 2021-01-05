@@ -21,8 +21,8 @@ function champImage(championId, id) {
     return (
       <ChampPortrait
         championId={championId}
-        className="board-portrait"
-        borderColor={championId < 6 ? '#3388ff' : '#ff88aa'}
+        className={'board-portrait' + id}
+        borderColor={id < 6 ? '#3388ff' : '#ff88aa'}
       />
     );
   }
