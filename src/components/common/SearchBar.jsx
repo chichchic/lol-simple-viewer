@@ -17,6 +17,9 @@ export default function SearchBar({ onClick = () => {} }) {
       <input
         className="search-bar--input"
         onChange={(e) => changeInputValue(e.target.value)}
+        onKeyDown={(e) => {
+          e.key == 'Enter' && onClickButton();
+        }}
         value={inputValue}
       />
       <Button label="search" onClick={onClickButton} />
