@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import ItemBox from '../../components/MatchList/Item/ItemBox';
 
-import { trinketList } from '../../fixture/itemList';
+import { trinketList } from '../../fixture/fixedData';
 
+//BUG: 예전 시즌 아이템들을 받아오지 못하는 오류가 발생함.
 export default function Map({ itemLogs, participantChamps, curTime }) {
   const [itemStatus, setItemStatus] = useState();
   useEffect(() => {
