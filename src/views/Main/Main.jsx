@@ -1,22 +1,23 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import SearchBar from '../../components/common/SearchBar';
+import SummonerSearchBar from '../../components/common/SummonerSearchBar';
 import TextLink from '../../components/common/TextLink';
+import { getsummonerInfo } from '../../fixture/getInfoFuncs.js';
 
 import './Main.scss';
 
 export default function Main() {
   const history = useHistory();
 
-  function searchsummoner(name) {
+  function moveMatchListView(name) {
     history.push('/match-list/' + name);
   }
 
   return (
     <section className="main">
       <TextLink label="LoLSimpleViewer" url="/" fontSize="5rem" />
-      <SearchBar onClick={searchsummoner} />
+      <SummonerSearchBar callBack={moveMatchListView} />
     </section>
   );
 }

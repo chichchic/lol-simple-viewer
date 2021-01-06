@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import InfoBoxList from '../../components/MatchList/InfoBoxList';
 import TextLink from '../../components/common/TextLink';
-import SearchBar from '../../components/common/SearchBar';
+import SummonerSearchBar from '../../components/common/SummonerSearchBar';
 import Profile from '../../components/MatchList/Profile';
 import Rank from '../../components/MatchList/Rank';
 
@@ -22,11 +22,6 @@ export default function MatchList() {
   const history = useHistory();
   const { name } = useParams();
   const gettingListNum = 5;
-
-  function searchsummoner(inputVal) {
-    //reset init data
-    history.push('/match-list/' + inputVal);
-  }
 
   const [gameIdList, setgameIdList] = useState([]);
   const [gameListIdx, setgameListIdx] = useState(0);
@@ -71,7 +66,8 @@ export default function MatchList() {
   useEffect(() => {
     if (account) {
       (async () => {
-        const matches = await getmatchList(
+        // match list info에서 제공해주는 모든 데이터를 받도록 해야함
+        const { matches } = await getmatchList(
           gameListIdx,
           account,
           gettingListNum,
@@ -85,7 +81,9 @@ export default function MatchList() {
     <section className="match-list">
       <div className="top-nav">
         <TextLink label="LoLSimpleViewer" url={`/`} fontSize="2rem" />
-        <SearchBar onClick={searchsummoner} />
+        <SummonerSearchBar
+          callBack={(name) => history.push('/match-list/' + name)}
+        />
       </div>
       <div className="content">
         <div className="left-content">
