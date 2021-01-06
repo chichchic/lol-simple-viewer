@@ -80,7 +80,7 @@ export default function MatchList() {
   return (
     <section className="match-list">
       <div className="top-nav">
-        <TextLink label="LoLSimpleViewer" url={`/`} fontSize="2rem" />
+        <TextLink label="LoLSimpleViewer" url="/" fontSize="2rem" />
         <SummonerSearchBar
           callBack={(name) => history.push('/match-list/' + name)}
         />
