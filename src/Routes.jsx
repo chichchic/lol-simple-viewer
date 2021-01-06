@@ -6,19 +6,15 @@ import MatchList from './views/MatchList/MatchList';
 import TimeLine from './views/TimeLine/TimeLine';
 import NotFound from './views/error/NotFound';
 
-class Routes extends React.Component {
-  render() {
-    return (
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Main} />
-          <Route exact path="/match-list/:name" component={MatchList} />
-          <Route exact path="/time-line/:matchId" component={TimeLine} />
-          <Route exact path="*" component={NotFound} />
-        </Switch>
-      </Router>
-    );
-  }
+export default function Routes() {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Main} />
+        <Route exact path="/match-list/:name" component={MatchList} />
+        <Route exact path="/time-line/:matchId" component={TimeLine} />
+        <Route exact path="*" component={NotFound} />
+      </Switch>
+    </Router>
+  );
 }
-
-export default Routes;
