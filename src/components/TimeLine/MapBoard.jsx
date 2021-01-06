@@ -2,8 +2,36 @@ import React, { useEffect, useState, useRef } from 'react';
 
 import ImgComponent from '../common/ImgComponent';
 import ChampPortrait from '../MatchList/Champ/ChampPortrait';
-
+import {
+  BuildingPosition11,
+  BuildingPosition12,
+} from '../../fixture/fixedData.js';
 import './MapBoard.scss';
+
+function drawBuildings(ratio, buildingPosition) {
+  const { blue, red } = buildingPosition;
+  const arr = [];
+  Object.keys(blue).forEach((key) => {
+    arr.push(...drawBuilding(blue[key], ratio, 'BLUE' + key));
+  });
+  Object.keys(red).forEach((key) => {
+    arr.push(...drawBuilding(red[key], ratio, 'RED' + key));
+  });
+  return arr;
+}
+
+function drawBuilding(building, ratio, lane) {
+  return Object.keys(building).map((key) => {
+    const { x, y } = building[key];
+    return (
+      <div
+        key={lane + key}
+        className={`building ${lane} ${key}`}
+        style={{ left: 800 - x * ratio, top: y * ratio }}
+      ></div>
+    );
+  });
+}
 export default function MapBoard({
   mapId,
   moveFrame,
@@ -35,13 +63,17 @@ export default function MapBoard({
         alt={'map' + mapId}
         className="mini-map"
       />
+      {drawBuildings(
+        ratio,
+        mapId == 11 ? BuildingPosition11 : BuildingPosition12,
+      )}
       {Object.keys(participantChamps).map((key, index) => (
         <ChampPortrait
           championId={participantChamps[key]}
           className="map-champ-portrait"
           key={key}
-          left={800 - positions[index].x * ratio}
-          top={positions[index].y * ratio}
+          left={800 - positions[index].y * ratio}
+          top={positions[index].x * ratio}
           borderColor={index < 5 ? '#3388ff' : '#ff88aa'}
         />
       ))}
