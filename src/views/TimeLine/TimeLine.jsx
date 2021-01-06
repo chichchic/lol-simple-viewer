@@ -67,6 +67,7 @@ function addEventLog(
     killerId,
     victimId,
     monsterType,
+    monsterSubType,
     buildingType,
     laneType,
     teamId,
@@ -81,7 +82,7 @@ function addEventLog(
       eventLogs[timestamp][type] = { killerId, victimId };
       break;
     case 'ELITE_MONSTER_KILL':
-      eventLogs[timestamp][type] = { killerId, monsterType };
+      eventLogs[timestamp][type] = { killerId, monsterType, monsterSubType };
       break;
     case 'BUILDING_KILL':
       eventLogs[timestamp][type] = {
@@ -92,6 +93,7 @@ function addEventLog(
         towerType,
       };
       break;
+    default:
   }
 }
 
@@ -113,6 +115,8 @@ function extractEvents(events, moveLogs, itemLogs, eventLogs, dragonList) {
         addEventLog(eventLogs, event);
         break;
       case 'BUILDING_KILL':
+        event.teamId === 200 &&
+          console.log(event.laneType, event.towerType, event.position);
         addEventLog(eventLogs, event);
         addMoveLog(
           moveLogs,
@@ -141,13 +145,12 @@ function extractEvents(events, moveLogs, itemLogs, eventLogs, dragonList) {
       case 'ITEM_DESTROYED':
         addItemLog(itemLogs, event);
         break;
+      default:
     }
   });
 }
 
 function makeLogs({ frames }, { gameDuration, participants }) {
-  console.log(frames);
-  console.log(participants);
   const endTime = (gameDuration + 1) * 1000;
   const participantChamps = {};
   const moveLogs = {};
@@ -189,12 +192,29 @@ export default function TimeLine() {
   const [itemLogs, setItemLogs] = useState(false);
   const [eventLogs, setEventLogs] = useState(false);
   const [participantChamps, setParticipantChamps] = useState(false);
-
+  const [curTime, setCurTime] = useState(0);
+  const [map, setMap] = useState();
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurTime((oldVal) => {
+        if (oldVal > endTime) {
+          clearInterval(interval);
+        }
+        return oldVal + 1000;
+      });
+    }, 10);
+  }, [endTime]);
   useEffect(() => {
     (async () => {
       const timeLine = await getTimeLine(matchId);
       const matchDto = await getMatchDto(matchId);
+      const { mapId } = matchDto;
+      setMap(mapId);
       const [end, champ, move, item, event] = makeLogs(timeLine, matchDto);
+      setEndTime(end);
+      setMoveLogs(move);
+      setItemLogs(item);
+      setEventLogs(event);
       setParticipantChamps(champ);
       setIsLoading(true);
     })();
@@ -204,9 +224,23 @@ export default function TimeLine() {
   }
   return (
     <section className="time-line">
-      <ItemBoard />
-      <MapBoard mapId={12} participantChamps={participantChamps} />
-      <Board />
+      <ItemBoard
+        itemLogs={itemLogs}
+        participantChamps={participantChamps}
+        curTime={curTime}
+      />
+      <MapBoard
+        mapId={map}
+        moveFrame={moveLogs}
+        participantChamps={participantChamps}
+        curTime={curTime}
+        eventLogs={eventLogs}
+      />
+      <Board
+        eventLogs={eventLogs}
+        participantChamps={participantChamps}
+        curTime={curTime}
+      />
     </section>
   );
 }
