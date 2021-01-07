@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
 import InfoBoxList from '../../components/MatchList/InfoBoxList';
@@ -10,7 +9,6 @@ import Rank from '../../components/MatchList/Rank';
 
 import './MatchList.scss';
 
-import { getJson } from '../../store/action/json';
 import {
   getsummonerInfo,
   getLeagueInfo,
@@ -18,7 +16,6 @@ import {
 } from '../../fixture/getInfoFuncs.js';
 
 export default function MatchList() {
-  const dispatch = useDispatch();
   const history = useHistory();
   const { name } = useParams();
   const gettingListNum = 5;
@@ -45,7 +42,6 @@ export default function MatchList() {
         accountId,
         summonerLevel,
       } = await getsummonerInfo(name);
-      await dispatch(getJson());
       const league = await getLeagueInfo(id);
       setAccount(accountId);
       setIconId(profileIconId);
@@ -61,7 +57,7 @@ export default function MatchList() {
       setgameListIdx(0);
       setgameIdList([]);
     };
-  }, [dispatch, name]);
+  }, [name]);
 
   useEffect(() => {
     if (account) {
