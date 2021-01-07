@@ -9,24 +9,29 @@ export function setJson(jsonData, type) {
 
 export function getJson() {
   return async (dispatch) => {
-    const promises = [];
-    dragonJsonTypes.forEach((val) => {
-      promises.push(fetchJsonUrl(val));
-    });
-    const result = await Promise.all(promises);
-    dispatch(setJson(result));
+    try {
+      const promises = [];
+      dragonJsonTypes.forEach((val) => {
+        promises.push(fetchJsonUrl(val));
+      });
+      const result = await Promise.all(promises);
+      dispatch(setJson(result));
+    } catch (err) {
+      throw new Error(err);
+    }
   };
 }
 
 function fetchJsonUrl(type) {
-  return new Promise((resolve, reject) => {
-    fetch(
+  return new Promise(async (resolve, reject) => {
+    const res = await fetch(
       `http://ddragon.leagueoflegends.com/cdn/10.25.1/data/en_US/${type}.json`,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        resolve(data);
-      });
+    );
+    if (!res.ok) {
+      reject(res.status);
+    } else {
+      resolve(res.json());
+    }
   });
 }
 
