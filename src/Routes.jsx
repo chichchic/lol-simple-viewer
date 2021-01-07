@@ -15,6 +15,11 @@ export default function Routes() {
         <Route exact path="/time-line/:matchId" component={TimeLine} />
         <Route
           exact
+          path="/bad-request"
+          render={() => <Error text={'500. Bad Request'} />}
+        />
+        <Route
+          exact
           path="*"
           render={() => <Error text={'sorry. we can not find the page'} />}
         />
