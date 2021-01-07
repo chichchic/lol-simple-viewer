@@ -2,13 +2,13 @@ import React from 'react';
 
 import TextLink from '../../components/common/TextLink';
 
-import './NotFound.scss';
+import './Error.scss';
 
-export default function NotFound() {
+export default function NotFound({ text }) {
   return (
     <section className="request-err">
       <TextLink label="LoLSimpleViewer" url="/" fontSize="5rem" />
-      <p>sorry. we can not find the page</p>
+      <p>{text}</p>
     </section>
   );
 }
