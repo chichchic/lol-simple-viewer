@@ -1,4 +1,4 @@
-import jsonTypes from '../../fixture/jsonType';
+import dragonJsonTypes from '../../fixture/dragonJsonTypes';
 
 export function setJson(jsonData, type) {
   return {
@@ -10,7 +10,7 @@ export function setJson(jsonData, type) {
 export function getJson() {
   return async (dispatch) => {
     const promises = [];
-    jsonTypes.forEach((val) => {
+    dragonJsonTypes.forEach((val) => {
       promises.push(fetchJsonUrl(val));
     });
     const result = await Promise.all(promises);

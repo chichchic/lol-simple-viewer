@@ -1,14 +1,14 @@
-import jsonTypes from '../../fixture/jsonType';
+import dragonJsonTypes from '../../fixture/dragonJsonTypes';
 
 const initJson = {};
-jsonTypes.forEach((val) => {
+dragonJsonTypes.forEach((val) => {
   initJson[val] = false;
 });
 
 export default function reducer(state = initJson, action) {
   const { type, payload } = action;
   if (type === 'setJson') {
-    jsonTypes.forEach((val, index) => {
+    dragonJsonTypes.forEach((val, index) => {
       state[val] = payload[index];
     });
     return state;
