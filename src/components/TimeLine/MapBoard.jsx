@@ -65,7 +65,7 @@ export default function MapBoard({
       />
       {drawBuildings(
         ratio,
-        mapId == 11 ? BuildingPosition11 : BuildingPosition12,
+        mapId === 11 ? BuildingPosition11 : BuildingPosition12,
       )}
       {Object.keys(participantChamps).map((key, index) => (
         <ChampPortrait

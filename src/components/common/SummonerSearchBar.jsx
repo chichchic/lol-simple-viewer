@@ -10,7 +10,7 @@ export default function SummonerSearchBar({ callBack }) {
       return;
     }
     try {
-      const data = await getsummonerInfo(name);
+      await getsummonerInfo(name);
       callBack && callBack(name);
     } catch (err) {
       alert('can not find the summoner');

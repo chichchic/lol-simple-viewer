@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 
 import SummonerSearchBar from '../../components/common/SummonerSearchBar';
 import TextLink from '../../components/common/TextLink';
-import { getsummonerInfo } from '../../fixture/getInfoFuncs.js';
 
 import './Main.scss';
 

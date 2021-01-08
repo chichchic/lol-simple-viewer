@@ -27,7 +27,6 @@ export default function MatchList() {
   const [level, setLevel] = useState(null);
   const [leagueInfo, setLeagueInfo] = useState(null);
   function mergeGameIdList(newArr) {
-    console.log(newArr);
     setgameIdList((oldArr) => [...oldArr, ...newArr]);
   }
   useEffect(() => {
