@@ -33,7 +33,8 @@ export async function getLeagueInfo(id) {
 }
 
 export async function getsummonerInfo(name) {
-  const url = `/lol/summoner/v4/summoners/by-name/${name}`;
+  const encodeName = encodeURI(name);
+  const url = `/lol/summoner/v4/summoners/by-name/${encodeName}`;
   const res = await requestWithRiotToken(url);
   return res;
 }
