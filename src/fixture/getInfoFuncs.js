@@ -1,4 +1,15 @@
-async function requestWithRiotToken(url) {
+function wait(time) {
+  alert(
+    `if it has too many requests in a short time, it will wait 2 min to request.`,
+  );
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  });
+}
+
+async function requestWithRiotToken(url, isRetry = false) {
   const res = await fetch(url, {
     method: 'GET',
     headers: {
@@ -6,7 +17,12 @@ async function requestWithRiotToken(url) {
       'X-Riot-Token': process.env.REACT_APP_LOL_API,
     },
   });
+  if (res.status === 429) {
+    await wait(2 * 60 * 1000);
+    return requestWithRiotToken(url, true);
+  }
   if (!res.ok) throw new Error(res.status);
+
   return res.json();
 }
 
