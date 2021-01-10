@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
 import ImgComponent from '../../common/ImgComponent';
 
-import './ChampSpell.scss';
-
-function makeSpellProps(spellJson, spellNum) {
+function findSrc(spellJson, spellNum) {
   for (const key in spellJson.data) {
     if (Object.hasOwnProperty.call(spellJson.data, key)) {
       if (spellJson.data[key].key === String(spellNum)) {
@@ -17,28 +15,22 @@ function makeSpellProps(spellJson, spellNum) {
       }
     }
   }
+  return false;
 }
 
-export default function ChampSpell({ firstSpellNum, secondSpellNum }) {
+export default function ChampSpell({ spellNum }) {
   const spellJson = useSelector((state) => state.json.summoner);
-  if (spellJson) {
-    return (
-      <article className="champ-spell">
-        <ImgComponent
-          {...makeSpellProps(spellJson, firstSpellNum)}
-          className="first-spell"
-        />
-        <ImgComponent
-          {...makeSpellProps(spellJson, secondSpellNum)}
-          className="first-spell"
-        />
-      </article>
-    );
+  const [imgSrc, setImgSrc] = useState(false);
+  useEffect(() => {
+    setImgSrc(findSrc(spellJson, spellNum));
+  }, [spellNum, spellJson]);
+  if (!imgSrc) {
+    //TODO: 나중에 적절한 이미지로 대체 할 것.
+    return <div>Err</div>;
   }
-  return <div>Loading</div>;
+  return <ImgComponent {...imgSrc} className="spell" />;
 }
 
 ChampSpell.propTypes = {
-  firstSpellNum: PropTypes.number.isRequired,
-  secondSpellNum: PropTypes.number.isRequired,
+  spellNum: PropTypes.number.isRequired,
 };

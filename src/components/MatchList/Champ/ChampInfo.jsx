@@ -17,22 +17,28 @@ export default function ChampInfo({
   deaths,
   assists,
   goldEarned,
-  totalKill,
+  killRatio,
 }) {
   return (
     <article className="champ-info">
-      <ChampSpell
-        firstSpellNum={firstSpellNum}
-        secondSpellNum={secondSpellNum}
-      />
-      <ChampRune firstRuneNum={firstRuneNum} secondRuneNum={secondRuneNum} />
+      <article className="champ-spell">
+        <ChampSpell spellNum={firstSpellNum} />
+        <ChampSpell spellNum={secondSpellNum} />
+      </article>
+      <article className="champ-rune">
+        <div className="main-rune-bg">
+          <ChampRune runeNum={firstRuneNum} />
+        </div>
+        <ChampRune runeNum={secondRuneNum} />
+      </article>
+
       <ChampPortrait championId={championId} champLevel={champLevel} />
       <ChampScoreBox
         kills={kills}
         deaths={deaths}
         assists={assists}
         goldEarned={goldEarned}
-        totalKill={totalKill}
+        killRatio={killRatio}
       />
     </article>
   );

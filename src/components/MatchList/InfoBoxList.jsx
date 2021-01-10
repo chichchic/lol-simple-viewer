@@ -16,10 +16,12 @@ export default function InfoBoxList({ account, showMore }) {
 
   useEffect(() => {
     if (account) {
-      setMatchesArr([]);
-      setBeginIndex(0);
       addMatchList();
     }
+    return () => {
+      setMatchesArr([]);
+      setBeginIndex(0);
+    };
   }, [account]);
   async function addMatchList() {
     if (isLoading) return;

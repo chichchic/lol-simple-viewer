@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import ChampInfo from './Champ/ChampInfo';
@@ -19,15 +19,18 @@ const initChmpInfo = {
   deaths: 0,
   assists: 0,
   goldEarned: 0,
-  totalKill: 0,
+  killRatio: 0,
 };
 function makeTeam(identities, participants, name) {
   let amIWin = false;
   const blueTeam = [];
   const redTeam = [];
   const itemBox = [];
-  let totalKill = 0;
-  let champInfo = { ...initChmpInfo };
+  let blueKill = 0;
+  let redKill = 0;
+  let champInfo = {};
+  let myTeam;
+
   participants.forEach(
     ({
       championId,
@@ -54,9 +57,9 @@ function makeTeam(identities, participants, name) {
       },
     }) => {
       const summonerName = identities[participantId - 1].player.summonerName;
-      totalKill += kills;
       if (summonerName.toLowerCase() === name.toLowerCase()) {
         amIWin = win;
+        myTeam = teamId;
         itemBox.push(item0, item1, item2, item3, item4, item5, item6);
         champInfo = {
           ...champInfo,
@@ -73,11 +76,13 @@ function makeTeam(identities, participants, name) {
         };
       }
       if (teamId === 100) {
+        blueKill += kills;
         blueTeam.push({
           championId,
           summonerName,
         });
       } else {
+        redKill += kills;
         redTeam.push({
           championId,
           summonerName,
@@ -85,8 +90,10 @@ function makeTeam(identities, participants, name) {
       }
     },
   );
-  champInfo.totalKill = totalKill;
-  return [blueTeam, redTeam, itemBox, champInfo, amIWin];
+  const totalKill = myTeam === 100 ? blueKill : redKill;
+  const killRatio =
+    ((((champInfo.kills + champInfo.assists) / totalKill) * 10000) >> 0) / 100;
+  return [blueTeam, redTeam, itemBox, { ...champInfo, killRatio }, amIWin];
 }
 
 export default function InfoBox({
@@ -97,11 +104,24 @@ export default function InfoBox({
   const history = useHistory();
   const { name } = useParams();
 
-  const [blueTeam, redTeam, itemBox, champInfo, amIWin] = makeTeam(
-    participantIdentities,
-    participants,
-    name,
-  );
+  const [blueTeam, setBlueTeam] = useState([]);
+  const [redTeam, setRedTeam] = useState([]);
+  const [itemBox, setItemBox] = useState([0, 0, 0, 0, 0, 0, 0]);
+  const [champInfo, setChampInfo] = useState(initChmpInfo);
+  const [amIWin, setAmIWin] = useState(null);
+
+  useEffect(() => {
+    const [blue, red, items, champ, win] = makeTeam(
+      participantIdentities,
+      participants,
+      name,
+    );
+    setBlueTeam(blue);
+    setRedTeam(red);
+    setItemBox(items);
+    setChampInfo((old) => ({ ...old, ...champ }));
+    setAmIWin(win);
+  }, [participantIdentities, participants, name]);
   return (
     <article className="info-box" style={amIWin ? isWin : isLose}>
       <ChampInfo {...champInfo} />

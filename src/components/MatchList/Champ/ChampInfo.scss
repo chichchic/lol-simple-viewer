@@ -4,4 +4,33 @@
   & > article:not(:last-child) {
     margin-right: 0.5rem;
   }
+  & .champ-spell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    & img {
+      width: 2rem;
+      height: 2rem;
+      &:first-child {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+  & .champ-rune {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    & .main-rune-bg {
+      background-color: #333333;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    & img {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
 }

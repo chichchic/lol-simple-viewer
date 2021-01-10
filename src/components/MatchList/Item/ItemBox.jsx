@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Item from './Item';
@@ -23,9 +23,13 @@ function makeItemBox(itemArray) {
 }
 
 export default function ItemBox({ itemArray, grid }) {
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    setItems(makeItemBox(itemArray));
+  }, [itemArray]);
   return (
     <article className={grid ? 'item-box' : 'horizontal'}>
-      {makeItemBox(itemArray).map((itemNum, idx) => (
+      {items.map((itemNum, idx) => (
         <Item
           key={idx}
           itemNum={itemNum}

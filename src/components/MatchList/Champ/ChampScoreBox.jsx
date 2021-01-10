@@ -8,7 +8,7 @@ export default function ChampScoreBox({
   deaths,
   assists,
   goldEarned,
-  totalKill,
+  killRatio,
 }) {
   return (
     <article className="champ-score-box">
@@ -21,10 +21,7 @@ export default function ChampScoreBox({
       </div>
       <div className="ka-ratio">
         P / Kill:&nbsp;
-        <span className="ka-ratio-score">
-          {Math.floor((kills / totalKill) * 10000) / 100}
-        </span>
-        %
+        <span className="ka-ratio-score">{killRatio}</span>%
       </div>
       <div className="cs">
         Gold:&nbsp;<span className="gold">{goldEarned}</span>

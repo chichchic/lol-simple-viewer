@@ -1,44 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
 import ImgComponent from '../../common/ImgComponent';
 
-import './ChampRune.scss';
-
-export default function ChampRune({ firstRuneNum, secondRuneNum }) {
-  const runeJson = useSelector((state) => state.json.runesReforged);
-  if (!runeJson) return <div>loading</div>;
-  const runeData = {};
-  runeJson.forEach((pVal) => {
-    runeData[pVal.id] = {
-      src: `../img/${pVal.icon}`,
-      alt: pVal.name,
-    };
-    pVal.slots.forEach(({ runes }) => {
-      runes.forEach(({ id, icon, name }) => {
-        runeData[id] = {
-          src: `../img/${icon}`,
-          alt: name,
-        };
-      });
-    });
-  });
-
-  function makeRuneProps(runeNum) {
-    return runeData[runeNum];
+function findSrc(runeJson, runeNum) {
+  for (const { id, icon, name, slots } of runeJson) {
+    if (id === runeNum) {
+      return {
+        src: `../img/${icon}`,
+        alt: name,
+      };
+    }
+    if (slots) {
+      for (const { runes } of slots) {
+        const inner = findSrc(runes, runeNum);
+        if (inner) return inner;
+      }
+    }
   }
-  return (
-    <article className="champ-rune">
-      <div className="main-rune-bg">
-        <ImgComponent {...makeRuneProps(firstRuneNum)} className="first-rune" />
-      </div>
-      <ImgComponent {...makeRuneProps(secondRuneNum)} className="second-rune" />
-    </article>
-  );
+  return false;
+}
+
+export default function ChampRune({ runeNum }) {
+  const runeJson = useSelector((state) => state.json.runesReforged);
+  const [imgSrc, setImgSrc] = useState(false);
+  useEffect(() => {
+    setImgSrc(findSrc(runeJson, runeNum));
+  }, [runeJson, runeNum]);
+  if (!imgSrc) {
+    //TODO: 나중에 적절한 이미지로 대체 할 것.
+    return <div>Err</div>;
+  }
+  return <ImgComponent {...imgSrc} className="rune" />;
 }
 
 ChampRune.propTypes = {
-  firstRuneNum: PropTypes.number.isRequired,
-  secondRuneNum: PropTypes.number.isRequired,
+  runeNum: PropTypes.number.isRequired,
 };

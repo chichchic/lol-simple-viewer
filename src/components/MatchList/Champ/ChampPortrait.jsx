@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
@@ -9,6 +9,19 @@ import './ChampPortrait.scss';
 const champImgUrl =
   'http://ddragon.leagueoflegends.com/cdn/10.25.1/img/champion/';
 
+function findSource(champJson, championId) {
+  for (const key in champJson) {
+    if (champJson[key].hasOwnProperty('key')) {
+      if (Number(champJson[key].key) === championId)
+        return {
+          src: champImgUrl + champJson[key].image.full,
+          alt: champJson[key].id,
+        };
+    }
+  }
+  return false;
+}
+
 export default function ChampPortrait({
   championId,
   champLevel,
@@ -18,15 +31,13 @@ export default function ChampPortrait({
   borderColor,
 }) {
   const champJson = useSelector((state) => state.json.champion.data);
-  const champData = {};
-  if (!champJson) return <div>Loading</div>;
-  for (const key in champJson) {
-    if (Object.hasOwnProperty.call(champJson, key)) {
-      champData[champJson[key].key] = {
-        src: champImgUrl + champJson[key].image.full,
-        alt: champJson[key].id,
-      };
-    }
+  const [imgSrc, setImgSrc] = useState(false);
+  useEffect(() => {
+    setImgSrc(findSource(champJson, championId));
+  }, [champJson, championId]);
+  if (!imgSrc) {
+    //TODO: 나중에 적절한 이미지로 대체 할 것.
+    return <div>Err</div>;
   }
   return (
     <article
@@ -35,7 +46,7 @@ export default function ChampPortrait({
     >
       {champLevel && <div className="champ-level">{champLevel}</div>}
       <ImgComponent
-        {...champData[championId]}
+        {...imgSrc}
         className="champ-portrait"
         borderColor={borderColor}
       />
