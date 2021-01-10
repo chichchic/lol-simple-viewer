@@ -9,32 +9,20 @@ import Rank from '../../components/MatchList/Rank';
 
 import './MatchList.scss';
 
-import {
-  getsummonerInfo,
-  getLeagueInfo,
-  getmatchList,
-} from '../../fixture/getInfoFuncs.js';
+import { getsummonerInfo, getLeagueInfo } from '../../fixture/getInfoFuncs.js';
 
 export default function MatchList() {
   const history = useHistory();
   const { name } = useParams();
-  const gettingListNum = 5;
 
-  const [gameIdList, setgameIdList] = useState([]);
-  const [gameListIdx, setgameListIdx] = useState(0);
   const [account, setAccount] = useState(null);
   const [iconId, setIconId] = useState(null);
   const [level, setLevel] = useState(null);
   const [leagueInfo, setLeagueInfo] = useState(null);
-  function mergeGameIdList(newArr) {
-    setgameIdList((oldArr) => [...oldArr, ...newArr]);
-  }
+
   useEffect(() => {
     async function getJsonDatas() {
-      if (!name) {
-        alert("Can't search empty string name");
-        return;
-      }
+      //TODO: 예외처리 넣어야함
       const {
         id,
         profileIconId,
@@ -53,24 +41,8 @@ export default function MatchList() {
       setIconId(null);
       setLevel(null);
       setLeagueInfo(null);
-      setgameListIdx(0);
-      setgameIdList([]);
     };
   }, [name]);
-
-  useEffect(() => {
-    if (account) {
-      (async () => {
-        // match list info에서 제공해주는 모든 데이터를 받도록 해야함
-        const { matches } = await getmatchList(
-          gameListIdx,
-          account,
-          gettingListNum,
-        );
-        mergeGameIdList(matches);
-      })();
-    }
-  }, [gameListIdx, account]);
 
   return (
     <section className="match-list">
@@ -88,15 +60,7 @@ export default function MatchList() {
 
         <div className="right-content">
           <div className="info-list">
-            <InfoBoxList gameIdList={gameIdList} />
-            <button
-              className="show-more-btn"
-              onClick={() =>
-                setgameListIdx((oldVal) => oldVal + gettingListNum)
-              }
-            >
-              SHOW MORE
-            </button>
+            <InfoBoxList account={account} />
           </div>
         </div>
       </div>
