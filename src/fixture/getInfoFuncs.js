@@ -10,20 +10,25 @@ function wait(time) {
 }
 
 async function requestWithRiotToken(url, isRetry = false) {
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Accept-Charset': 'application/x-www-form-urlencoded; charset=UTF-8',
-      'X-Riot-Token': process.env.REACT_APP_LOL_API,
-    },
-  });
-  if (res.status === 429) {
-    await wait(2 * 60 * 1000);
-    return requestWithRiotToken(url, true);
+  try {
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept-Charset': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Riot-Token': process.env.REACT_APP_LOL_API,
+      },
+    });
+    if (res.status === 429) {
+      await wait(2 * 60 * 1000);
+      return requestWithRiotToken(url, true);
+    }
+    if (!res.ok) {
+      throw res.status;
+    }
+    return res.json();
+  } catch (err) {
+    throw err;
   }
-  if (!res.ok) throw new Error(res.status);
-
-  return res.json();
 }
 
 export async function getLeagueInfo(id) {
@@ -32,7 +37,7 @@ export async function getLeagueInfo(id) {
     const res = await requestWithRiotToken(url);
     return res;
   } catch (err) {
-    throw new Error(err);
+    throw err;
   }
 }
 
@@ -43,7 +48,7 @@ export async function getsummonerInfo(name) {
     const res = await requestWithRiotToken(url);
     return res;
   } catch (err) {
-    throw new Error(err);
+    throw err;
   }
 }
 
@@ -53,7 +58,7 @@ export async function getTimeLine(matchId) {
     const res = await requestWithRiotToken(url);
     return res;
   } catch (err) {
-    throw new Error(err);
+    throw err;
   }
 }
 
@@ -63,7 +68,7 @@ export async function getMatchDto(matchId) {
     const res = await requestWithRiotToken(url);
     return res;
   } catch (err) {
-    throw new Error(err);
+    throw err;
   }
 }
 
@@ -74,6 +79,6 @@ export async function getmatchList(beginIndex, accountId, gettingListNum) {
     const res = await requestWithRiotToken(url);
     return res;
   } catch (err) {
-    throw new Error(err);
+    throw err;
   }
 }
