@@ -55,7 +55,7 @@ function makeTeam(identities, participants, name) {
     }) => {
       const summonerName = identities[participantId - 1].player.summonerName;
       totalKill += kills;
-      if (summonerName === name) {
+      if (summonerName.toLowerCase() === name.toLowerCase()) {
         amIWin = win;
         itemBox.push(item0, item1, item2, item3, item4, item5, item6);
         champInfo = {
@@ -91,12 +91,12 @@ function makeTeam(identities, participants, name) {
 
 export default function InfoBox({
   gameId,
-  mapId,
   participantIdentities,
   participants,
 }) {
   const history = useHistory();
   const { name } = useParams();
+
   const [blueTeam, redTeam, itemBox, champInfo, amIWin] = makeTeam(
     participantIdentities,
     participants,
