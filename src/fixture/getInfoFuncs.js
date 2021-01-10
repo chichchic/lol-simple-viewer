@@ -27,33 +27,53 @@ async function requestWithRiotToken(url, isRetry = false) {
 }
 
 export async function getLeagueInfo(id) {
-  const url = `/lol/league/v4/entries/by-summoner/${id}`;
-  const res = await requestWithRiotToken(url);
-  return res;
+  try {
+    const url = `/lol/league/v4/entries/by-summoner/${id}`;
+    const res = await requestWithRiotToken(url);
+    return res;
+  } catch (err) {
+    throw new Error(err);
+  }
 }
 
 export async function getsummonerInfo(name) {
-  const encodeName = encodeURI(name);
-  const url = `/lol/summoner/v4/summoners/by-name/${encodeName}`;
-  const res = await requestWithRiotToken(url);
-  return res;
+  try {
+    const encodeName = encodeURI(name);
+    const url = `/lol/summoner/v4/summoners/by-name/${encodeName}`;
+    const res = await requestWithRiotToken(url);
+    return res;
+  } catch (err) {
+    throw new Error(err);
+  }
 }
 
 export async function getTimeLine(matchId) {
-  const url = `/lol/match/v4/timelines/by-match/${matchId}`;
-  const res = await requestWithRiotToken(url);
-  return res;
+  try {
+    const url = `/lol/match/v4/timelines/by-match/${matchId}`;
+    const res = await requestWithRiotToken(url);
+    return res;
+  } catch (err) {
+    throw new Error(err);
+  }
 }
 
 export async function getMatchDto(matchId) {
-  const url = `/lol/match/v4/matches/${matchId}`;
-  const res = await requestWithRiotToken(url);
-  return res;
+  try {
+    const url = `/lol/match/v4/matches/${matchId}`;
+    const res = await requestWithRiotToken(url);
+    return res;
+  } catch (err) {
+    throw new Error(err);
+  }
 }
 
 export async function getmatchList(beginIndex, accountId, gettingListNum) {
-  const endIndex = beginIndex + gettingListNum;
-  let url = `/lol/match/v4/matchlists/by-account/${accountId}?beginIndex=${beginIndex}&endIndex=${endIndex}`;
-  const res = await requestWithRiotToken(url);
-  return res;
+  try {
+    const endIndex = beginIndex + gettingListNum;
+    let url = `/lol/match/v4/matchlists/by-account/${accountId}?beginIndex=${beginIndex}&endIndex=${endIndex}`;
+    const res = await requestWithRiotToken(url);
+    return res;
+  } catch (err) {
+    throw new Error(err);
+  }
 }
