@@ -76,9 +76,7 @@ export default function MatchList() {
     <section className="match-list">
       <div className="top-nav">
         <TextLink label="LoLSimpleViewer" url="/" fontSize="2rem" />
-        <SummonerSearchBar
-          callBack={(name) => history.push('/match-list/' + name)}
-        />
+        <SummonerSearchBar />
       </div>
       <div className="content">
         <div className="left-content">
