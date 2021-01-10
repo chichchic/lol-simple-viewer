@@ -6,6 +6,7 @@ import TextLink from '../../components/common/TextLink';
 import SummonerSearchBar from '../../components/common/SummonerSearchBar';
 import Profile from '../../components/MatchList/Profile';
 import Rank from '../../components/MatchList/Rank';
+import Loading from '../common/Loading';
 
 import './MatchList.scss';
 
@@ -19,21 +20,27 @@ export default function MatchList() {
   const [iconId, setIconId] = useState(null);
   const [level, setLevel] = useState(null);
   const [leagueInfo, setLeagueInfo] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     async function getJsonDatas() {
       //TODO: 예외처리 넣어야함
-      const {
-        id,
-        profileIconId,
-        accountId,
-        summonerLevel,
-      } = await getsummonerInfo(name);
-      const league = await getLeagueInfo(id);
-      setAccount(accountId);
-      setIconId(profileIconId);
-      setLevel(summonerLevel);
-      setLeagueInfo(league);
+      try {
+        setLoading(true);
+        const {
+          id,
+          profileIconId,
+          accountId,
+          summonerLevel,
+        } = await getsummonerInfo(name);
+        const league = await getLeagueInfo(id);
+        setAccount(accountId);
+        setIconId(profileIconId);
+        setLevel(summonerLevel);
+        setLeagueInfo(league);
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     }
     getJsonDatas();
     return () => {
@@ -43,7 +50,9 @@ export default function MatchList() {
       setLeagueInfo(null);
     };
   }, [name]);
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <section className="match-list">
       <div className="top-nav">
@@ -59,9 +68,7 @@ export default function MatchList() {
         </div>
 
         <div className="right-content">
-          <div className="info-list">
-            <InfoBoxList account={account} />
-          </div>
+          <InfoBoxList account={account} />
         </div>
       </div>
     </section>
