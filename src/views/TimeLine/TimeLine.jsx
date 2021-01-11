@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import ItemBoard from '../../components/TimeLine/ItemBoard';
 import MapBoard from '../../components/TimeLine/MapBoard';
 import Board from '../../components/TimeLine/Board';
+import Loading from '../common/Loading';
 
 import { getTimeLine, getMatchDto } from '../../fixture/getInfoFuncs.js';
 
@@ -220,7 +221,7 @@ export default function TimeLine() {
     })();
   }, [matchId]);
   if (!isLoading) {
-    return <div>Loading</div>;
+    return <Loading />;
   }
   return (
     <section className="time-line">
