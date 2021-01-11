@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import InfoBoxList from '../../components/MatchList/InfoBoxList';
 import TextLink from '../../components/common/TextLink';
@@ -13,7 +13,6 @@ import './MatchList.scss';
 import { getsummonerInfo, getLeagueInfo } from '../../fixture/getInfoFuncs.js';
 
 export default function MatchList() {
-  const history = useHistory();
   const { name } = useParams();
 
   const [account, setAccount] = useState(null);
