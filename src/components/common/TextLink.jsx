@@ -13,7 +13,9 @@ export default function TextLink({ label, url, fontSize }) {
   const history = useHistory();
 
   function handleClick() {
-    history.push(url);
+    if (url) {
+      history.push(url);
+    }
   }
 
   return (
@@ -22,6 +24,9 @@ export default function TextLink({ label, url, fontSize }) {
       type="button"
       onClick={handleClick}
       fontSize={fontSize}
+      style={{
+        cursor: url ? 'pointer' : 'default',
+      }}
     >
       {label}
     </Button>
@@ -30,5 +35,4 @@ export default function TextLink({ label, url, fontSize }) {
 
 TextLink.propTypes = {
   label: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
 };
