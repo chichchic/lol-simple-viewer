@@ -1,6 +1,6 @@
 import dragonJsonTypes from '../../fixture/dragonJsonTypes';
 
-export function setJson(jsonData, type) {
+export function setJson(jsonData) {
   return {
     type: `setJson`,
     payload: jsonData,
