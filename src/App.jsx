@@ -7,12 +7,17 @@ import { getJson } from './store/action/json';
 import Routes from './Routes';
 import Loading from './views/common/Loading';
 import Error from './views/error/Error';
+import ApiKey from './views/ApiKey/ApiKey';
 
 import './App.scss';
 export default function App() {
   const dispatch = useDispatch();
-  const dragonJson = useSelector((state) => state.json);
-  const [hasJson, setHasJson] = useState('');
+  const dragonJson = useSelector(({ json }) => json);
+  const apiKey = useSelector(({ apiKey: { key } }) => {
+    return key;
+  });
+  const [hasJson, setHasJson] = useState('init');
+  const [hasKey, setHasKey] = useState(null);
   useEffect(() => {
     for (const key in dragonJson) {
       if (!dragonJson[key]) {
@@ -29,6 +34,14 @@ export default function App() {
     }
   }, [dragonJson, dispatch]);
 
+  useEffect(() => {
+    if (apiKey) {
+      setHasKey(apiKey);
+    }
+  }, [apiKey]);
+  if (!hasKey) {
+    return <ApiKey />;
+  }
   switch (hasJson) {
     case 'loading':
       return <Loading />;
