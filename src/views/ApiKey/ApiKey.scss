@@ -1,0 +1,31 @@
+.api-key {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  & .riot-dev-site {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+    & img {
+      margin-left: 3rem;
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+  &--input {
+    display: flex;
+    align-items: center;
+    & > input {
+      font-size: 3rem;
+      padding: 0.5rem 1rem;
+    }
+    & > button {
+      margin-left: 1rem;
+      height: 5rem;
+    }
+  }
+}
