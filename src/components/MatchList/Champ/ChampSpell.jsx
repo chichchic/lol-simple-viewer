@@ -9,7 +9,7 @@ function findSrc(spellJson, spellNum) {
     if (Object.hasOwnProperty.call(spellJson.data, key)) {
       if (spellJson.data[key].key === String(spellNum)) {
         return {
-          src: `http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${spellJson.data[key].id}.png`,
+          src: `http://ddragon.leagueoflegends.com/cdn/11.4.1/img/spell/${spellJson.data[key].id}.png`,
           alt: spellJson.data[key].name,
         };
       }

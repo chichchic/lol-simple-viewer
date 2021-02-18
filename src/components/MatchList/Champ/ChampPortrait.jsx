@@ -7,7 +7,7 @@ import ImgComponent from '../../common/ImgComponent';
 import './ChampPortrait.scss';
 
 const champImgUrl =
-  'http://ddragon.leagueoflegends.com/cdn/10.25.1/img/champion/';
+  'http://ddragon.leagueoflegends.com/cdn/11.4.1/img/champion/';
 
 function findSource(champJson, championId) {
   for (const key in champJson) {

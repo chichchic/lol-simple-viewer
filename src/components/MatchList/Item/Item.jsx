@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import ImgComponent from '../../common/ImgComponent';
 
-const itemImgUrl = 'http://ddragon.leagueoflegends.com/cdn/10.25.1/img/item/';
+const itemImgUrl = 'http://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/';
 const blankSrc = {
   src: '../img/blank.png',
   alt: 'empty',

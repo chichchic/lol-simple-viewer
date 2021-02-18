@@ -53,7 +53,7 @@ function eliteMonsterImage(championId, monsterType, monsterSubType) {
     return (
       <div className="board-portrait">
         <img
-          src="http://ddragon.leagueoflegends.com/cdn/10.25.1/img/profileicon/839.png"
+          src="http://ddragon.leagueoflegends.com/cdn/11.4.1/img/profileicon/839.png"
           alt="minion"
           style={{ borderColor: championId < 6 ? '#3388ff' : '#ff88aa' }}
         />

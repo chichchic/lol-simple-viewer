@@ -7,7 +7,7 @@ import ImgComponent from '../common/ImgComponent';
 import './Profile.scss';
 
 const profileUrl =
-  'http://ddragon.leagueoflegends.com/cdn/10.25.1/img/profileicon/';
+  'http://ddragon.leagueoflegends.com/cdn/11.4.1/img/profileicon/';
 
 export default function Profile({ profileIconId, summonerLevel }) {
   const { name } = useParams();
