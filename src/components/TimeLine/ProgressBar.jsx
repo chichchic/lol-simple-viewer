@@ -1,26 +1,54 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+//TODO: undersocre 필요없을 경우 삭제할 것. loadash와 비교하여 사용할 것!
 import * as _ from 'underscore';
 
 import './ProgressBar.scss';
 
-export default function ProgressBar({ totalTime, curTime, loadingTime }) {
+export default function ProgressBar({
+  totalTime,
+  curTime,
+  loadingTime,
+  curTimeController,
+}) {
   const [isHover, setIsHover] = useState(false);
-  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const [progressRate, setProgressRate] = useState(0);
   const [loadingRate, setLoadingRate] = useState(0);
   const [hoverRate, setHoverRate] = useState(0);
-
-  function moveMouse(e) {
-    const parentWidth = e.target.offsetWidth;
-    const curWidth = e.clientX - e.target.getBoundingClientRect().left;
-    const curRate = curWidth / parentWidth;
-    setHoverRate(curRate);
-    // if (isMouseDown) {
-    //   setProgressRate(curRate);
-    // }
+  let parentRight = null;
+  let parentLeft = null;
+  function calcCurRate(e) {
+    const curX = e.clientX;
+    const parentWidth = parentRight - parentLeft;
+    let curWidth = curX - parentLeft;
+    if (curWidth < 0) {
+      curWidth = 0;
+    }
+    if (curWidth > parentWidth) {
+      curWidth = parentWidth;
+    }
+    return curWidth / parentWidth;
   }
 
+  function windowMouseMove(e) {
+    const curRate = calcCurRate(e);
+    curTimeController(Math.round(totalTime * curRate));
+    setHoverRate(curRate);
+  }
+
+  function mouseHoverMove(e) {
+    if (parentLeft === null) {
+      parentLeft = e.target.getBoundingClientRect().left;
+      parentRight =
+        e.target.offsetWidth + e.target.getBoundingClientRect().left;
+    }
+    if (isClicked) {
+      return;
+    }
+    const curRate = calcCurRate(e);
+    setHoverRate(curRate);
+  }
   useEffect(() => {
     setProgressRate(curTime / totalTime);
   }, [totalTime, curTime]);
@@ -32,13 +60,21 @@ export default function ProgressBar({ totalTime, curTime, loadingTime }) {
     <div
       className="progress-bar"
       onMouseEnter={() => setIsHover(true)}
-      onMouseMove={(e) => moveMouse(e)}
       onMouseLeave={() => setIsHover(false)}
+      onMouseMove={(e) => mouseHoverMove(e)}
       onMouseDown={(e) => {
-        setIsMouseDown(true);
-        moveMouse(e);
+        setIsClicked(true);
+        curTimeController(Math.round(totalTime * hoverRate));
+        window.addEventListener(
+          'mouseup',
+          () => {
+            window.removeEventListener('mousemove', windowMouseMove, false);
+            setIsClicked(false);
+          },
+          { once: true },
+        );
+        window.addEventListener('mousemove', windowMouseMove, false);
       }}
-      onMouseUp={(e) => setIsMouseDown(false)}
       style={{ height: isHover ? '12px' : '10px' }}
     >
       <div
@@ -55,7 +91,7 @@ export default function ProgressBar({ totalTime, curTime, loadingTime }) {
         className="loading"
         style={{ transform: `scaleX(${loadingRate})` }}
       ></div>
-      {isHover && (
+      {(isHover || isClicked) && (
         <div
           className="indicator"
           style={{
@@ -72,4 +108,5 @@ ProgressBar.propTypes = {
   totalTime: PropTypes.number.isRequired,
   curTime: PropTypes.number.isRequired,
   loadingTime: PropTypes.number.isRequired,
+  curTimeController: PropTypes.func.isRequired,
 };
