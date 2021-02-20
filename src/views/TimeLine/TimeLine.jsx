@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import ItemBoard from '../../components/TimeLine/ItemBoard';
 import MapBoard from '../../components/TimeLine/MapBoard';
 import Board from '../../components/TimeLine/Board';
+import PlayerController from '../../components/TimeLine/PlayerController';
 import Loading from '../common/Loading';
 
 import { getTimeLine, getMatchDto } from '../../fixture/getInfoFuncs.js';
@@ -195,16 +196,7 @@ export default function TimeLine() {
   const [participantChamps, setParticipantChamps] = useState(false);
   const [curTime, setCurTime] = useState(0);
   const [map, setMap] = useState();
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurTime((oldVal) => {
-        if (oldVal > endTime) {
-          clearInterval(interval);
-        }
-        return oldVal + 1000;
-      });
-    }, 10);
-  }, [endTime]);
+
   useEffect(() => {
     (async () => {
       const timeLine = await getTimeLine(matchId);
@@ -230,13 +222,20 @@ export default function TimeLine() {
         participantChamps={participantChamps}
         curTime={curTime}
       />
-      <MapBoard
-        mapId={map}
-        moveFrame={moveLogs}
-        participantChamps={participantChamps}
-        curTime={curTime}
-        eventLogs={eventLogs}
-      />
+      <div className="center">
+        <MapBoard
+          mapId={map}
+          moveFrame={moveLogs}
+          participantChamps={participantChamps}
+          curTime={curTime}
+          eventLogs={eventLogs}
+        />
+        <PlayerController
+          totalTime={endTime}
+          curTime={curTime}
+          setCurTime={setCurTime}
+        />
+      </div>
       <Board
         eventLogs={eventLogs}
         participantChamps={participantChamps}
