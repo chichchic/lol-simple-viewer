@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import ItemBoard from '../../components/TimeLine/ItemBoard';
@@ -187,6 +188,9 @@ function makeLogs({ frames }, { gameDuration, participants }) {
 //TODO: 뒤로가기
 //TODO: TimeLine Filter
 export default function TimeLine() {
+  const apiKey = useSelector(({ apiKey: { key } }) => {
+    return key;
+  });
   const { matchId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [endTime, setEndTime] = useState(false);
@@ -199,8 +203,8 @@ export default function TimeLine() {
 
   useEffect(() => {
     (async () => {
-      const timeLine = await getTimeLine(matchId);
-      const matchDto = await getMatchDto(matchId);
+      const timeLine = await getTimeLine(matchId, apiKey);
+      const matchDto = await getMatchDto(matchId, apiKey);
       const { mapId } = matchDto;
       setMap(mapId);
       const [end, champ, move, item, event] = makeLogs(timeLine, matchDto);

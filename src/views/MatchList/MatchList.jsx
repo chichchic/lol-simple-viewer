@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import InfoBoxList from '../../components/MatchList/InfoBoxList';
@@ -20,6 +21,9 @@ export default function MatchList() {
   const [level, setLevel] = useState(null);
   const [leagueInfo, setLeagueInfo] = useState(null);
   const [loading, setLoading] = useState(false);
+  const apiKey = useSelector(({ apiKey: { key } }) => {
+    return key;
+  });
   useEffect(() => {
     async function getJsonDatas() {
       //TODO: 예외처리 넣어야함
@@ -30,8 +34,8 @@ export default function MatchList() {
           profileIconId,
           accountId,
           summonerLevel,
-        } = await getsummonerInfo(name);
-        const league = await getLeagueInfo(id);
+        } = await getsummonerInfo(name, apiKey);
+        const league = await getLeagueInfo(id, apiKey);
         setAccount(accountId);
         setIconId(profileIconId);
         setLevel(summonerLevel);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import InfoBox from './InfoBox';
 import Loading from '../common/ComponentLoading';
@@ -8,6 +9,9 @@ import { getmatchList, getMatchDto } from '../../fixture/getInfoFuncs.js';
 const gettingListNum = 5;
 
 export default function InfoBoxList({ account, showMore }) {
+  const apiKey = useSelector(({ apiKey: { key } }) => {
+    return key;
+  });
   const [matchesArr, setMatchesArr] = useState([]);
   const [canGetMoreData, setCanGetMoreData] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,12 +35,15 @@ export default function InfoBoxList({ account, showMore }) {
         beginIndex,
         account,
         gettingListNum,
+        apiKey,
       );
-      const { matches, startIndex, endIndex, totalGames } = matchListData;
+      const { matches, endIndex, totalGames } = matchListData;
       if (endIndex === totalGames) {
         setCanGetMoreData(false);
       } else {
-        const promises = matches.map(({ gameId }) => getMatchDto(gameId));
+        const promises = matches.map(({ gameId }) => {
+          return getMatchDto(gameId, apiKey);
+        });
         const matchInfos = await Promise.all(promises);
         setMatchesArr((oldInfo) => [...oldInfo, ...matchInfos]);
         setBeginIndex(endIndex);

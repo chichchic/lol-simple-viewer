@@ -1,10 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import SearchBar from './SearchBar';
 import { getsummonerInfo } from '../../fixture/getInfoFuncs.js';
 
 export default function SummonerSearchBar() {
+  const apiKey = useSelector(({ apiKey: { key } }) => {
+    return key;
+  });
   const history = useHistory();
 
   function moveMatchListView(name) {
@@ -16,7 +20,7 @@ export default function SummonerSearchBar() {
       return;
     }
     try {
-      await getsummonerInfo(name);
+      await getsummonerInfo(name, apiKey);
       moveMatchListView(name);
     } catch (err) {
       alert('can not find the summoner');
