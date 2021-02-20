@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import InfoBoxList from '../../components/MatchList/InfoBoxList';
-import TextLink from '../../components/common/TextLink';
-import SummonerSearchBar from '../../components/common/SummonerSearchBar';
-import Profile from '../../components/MatchList/Profile';
-import Rank from '../../components/MatchList/Rank';
+import InfoBoxList from 'components/MatchList/InfoBoxList';
+import TextLink from 'components/common/TextLink';
+import SummonerSearchBar from 'components/common/SummonerSearchBar';
+import Profile from 'components/MatchList/Profile';
+import Rank from 'components/MatchList/Rank';
 import Loading from '../common/Loading';
 
 import './MatchList.scss';
 
-import { getsummonerInfo, getLeagueInfo } from '../../fixture/getInfoFuncs.js';
+import { getsummonerInfo, getLeagueInfo } from 'fixture/getInfoFuncs.js';
 
 export default function MatchList() {
   const { name } = useParams();

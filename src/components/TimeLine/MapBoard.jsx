@@ -2,10 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 
 import ImgComponent from '../common/ImgComponent';
 import ChampPortrait from '../MatchList/Champ/ChampPortrait';
-import {
-  BuildingPosition11,
-  BuildingPosition12,
-} from '../../fixture/fixedData.js';
+import { BuildingPosition11, BuildingPosition12 } from 'fixture/fixedData.js';
 import './MapBoard.scss';
 
 function drawBuildings(ratio, buildingPosition) {

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import SearchBar from './SearchBar';
-import { getsummonerInfo } from '../../fixture/getInfoFuncs.js';
+import { getsummonerInfo } from 'fixture/getInfoFuncs.js';
 
 export default function SummonerSearchBar() {
   const apiKey = useSelector(({ apiKey: { key } }) => {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Item from './Item';
 
 import './ItemBox.scss';
-import { trinketList } from '../../../fixture/fixedData';
+import { trinketList } from 'fixture/fixedData';
 
 function makeItemBox(itemArray) {
   const componentArr = [];

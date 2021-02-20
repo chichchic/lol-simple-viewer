@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import SummonerSearchBar from '../../components/common/SummonerSearchBar';
-import TextLink from '../../components/common/TextLink';
-import Button from '../../components/common/Button';
+import SummonerSearchBar from 'components/common/SummonerSearchBar';
+import TextLink from 'components/common/TextLink';
+import Button from 'components/common/Button';
 
-import { setApiKey } from '../../store/action/apiKey.js';
+import { setApiKey } from 'store/action/apiKey.js';
 
 import './ApiKey.scss';
 

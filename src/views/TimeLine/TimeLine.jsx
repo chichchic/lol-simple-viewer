@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import ItemBoard from '../../components/TimeLine/ItemBoard';
-import MapBoard from '../../components/TimeLine/MapBoard';
-import Board from '../../components/TimeLine/Board';
-import PlayerController from '../../components/TimeLine/PlayerController';
+import ItemBoard from 'components/TimeLine/ItemBoard';
+import MapBoard from 'components/TimeLine/MapBoard';
+import Board from 'components/TimeLine/Board';
+import PlayerController from 'components/TimeLine/PlayerController';
 import Loading from '../common/Loading';
 
-import { getTimeLine, getMatchDto } from '../../fixture/getInfoFuncs.js';
+import { getTimeLine, getMatchDto } from 'fixture/getInfoFuncs.js';
 
 import './TimeLine.scss';
 

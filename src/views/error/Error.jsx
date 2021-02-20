@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TextLink from '../../components/common/TextLink';
+import TextLink from 'components/common/TextLink';
 
 import './Error.scss';
 

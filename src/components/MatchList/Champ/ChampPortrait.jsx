@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-import ImgComponent from '../../common/ImgComponent';
+import ImgComponent from 'components/common/ImgComponent';
 
 import './ChampPortrait.scss';
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-import ImgComponent from '../../common/ImgComponent';
+import ImgComponent from 'components/common/ImgComponent';
 
 function findSrc(spellJson, spellNum) {
   for (const key in spellJson.data) {

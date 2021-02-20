@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import InfoBox from './InfoBox';
-import Loading from '../common/ComponentLoading';
+import Loading from 'components/common/ComponentLoading.jsx';
 
-import { getmatchList, getMatchDto } from '../../fixture/getInfoFuncs.js';
+import { getmatchList, getMatchDto } from 'fixture/getInfoFuncs.js';
 
 const gettingListNum = 5;
 

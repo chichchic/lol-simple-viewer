@@ -1,4 +1,4 @@
-import dragonJsonTypes from '../../fixture/dragonJsonTypes';
+import dragonJsonTypes from 'fixture/dragonJsonTypes';
 
 export function setJson(jsonData) {
   return {

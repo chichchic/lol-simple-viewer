@@ -1,7 +1,7 @@
 import React from 'react';
 
-import SummonerSearchBar from '../../components/common/SummonerSearchBar';
-import TextLink from '../../components/common/TextLink';
+import SummonerSearchBar from 'components/common/SummonerSearchBar';
+import TextLink from 'components/common/TextLink';
 
 import './Main.scss';
 
