@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import SummonerSearchBar from 'components/common/SummonerSearchBar';
@@ -12,10 +12,17 @@ import './ApiKey.scss';
 export default function ApiKey() {
   const [key, setKey] = useState('');
   const dispatch = useDispatch();
+  useEffect(() => {
+    const token = localStorage.getItem('lol-token');
+    if (token !== null) {
+      dispatch(setApiKey(token));
+    }
+  }, []);
   function registKey() {
     if (key === '') {
       return;
     }
+    const token = localStorage.setItem('lol-token', key);
     dispatch(setApiKey(key));
   }
   return (
