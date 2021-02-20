@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 //TODO: undersocre 필요없을 경우 삭제할 것. loadash와 비교하여 사용할 것!
 import * as _ from 'underscore';
@@ -17,12 +17,13 @@ export default function ProgressBar({
   const [progressRate, setProgressRate] = useState(0);
   const [loadingRate, setLoadingRate] = useState(0);
   const [hoverRate, setHoverRate] = useState(0);
-  let parentRight = null;
-  let parentLeft = null;
+
+  const bar = useRef();
   function calcCurRate(e) {
     const curX = e.clientX;
-    const parentWidth = parentRight - parentLeft;
-    let curWidth = curX - parentLeft;
+    const barInfo = bar.current.getBoundingClientRect();
+    const parentWidth = barInfo.width;
+    let curWidth = curX - barInfo.left;
     if (curWidth < 0) {
       curWidth = 0;
     }
@@ -39,11 +40,6 @@ export default function ProgressBar({
   }
 
   function mouseHoverMove(e) {
-    if (parentLeft === null) {
-      parentLeft = e.target.getBoundingClientRect().left;
-      parentRight =
-        e.target.offsetWidth + e.target.getBoundingClientRect().left;
-    }
     if (isClicked) {
       return;
     }
@@ -59,6 +55,7 @@ export default function ProgressBar({
   }, [totalTime, loadingTime]);
   return (
     <div
+      ref={bar}
       className="progress-bar"
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
@@ -116,4 +113,5 @@ ProgressBar.propTypes = {
   curTime: PropTypes.number.isRequired,
   loadingTime: PropTypes.number.isRequired,
   curTimeController: PropTypes.func.isRequired,
+  setIsRunning: PropTypes.func.isRequired,
 };
