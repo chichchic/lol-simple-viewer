@@ -10,6 +10,7 @@ export default function ProgressBar({
   curTime,
   loadingTime,
   curTimeController,
+  setIsRunning,
 }) {
   const [isHover, setIsHover] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
@@ -63,11 +64,17 @@ export default function ProgressBar({
       onMouseLeave={() => setIsHover(false)}
       onMouseMove={(e) => mouseHoverMove(e)}
       onMouseDown={(e) => {
+        let prevRunningState;
         setIsClicked(true);
+        setIsRunning((prevState) => {
+          prevRunningState = prevState;
+          return false;
+        });
         curTimeController(Math.round(totalTime * hoverRate));
         window.addEventListener(
           'mouseup',
           () => {
+            setIsRunning(prevRunningState);
             window.removeEventListener('mousemove', windowMouseMove, false);
             setIsClicked(false);
           },
