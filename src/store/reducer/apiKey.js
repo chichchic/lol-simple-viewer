@@ -1,6 +1,6 @@
 import dragonJsonTypes from 'fixture/dragonJsonTypes';
 
-const init = { key: null };
+const init = { key: '' };
 
 export default function reducer(state = init, action) {
   const { type, payload } = action;

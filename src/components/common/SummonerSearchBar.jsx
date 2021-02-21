@@ -1,14 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import SearchBar from './SearchBar';
 import { getsummonerInfo } from 'fixture/getInfoFuncs.js';
+import { setApiKey } from 'store/action/apiKey.js';
 
 export default function SummonerSearchBar() {
   const apiKey = useSelector(({ apiKey: { key } }) => {
     return key;
   });
+  const dispatch = useDispatch();
+
   const history = useHistory();
 
   function moveMatchListView(name) {
@@ -23,7 +26,13 @@ export default function SummonerSearchBar() {
       await getsummonerInfo(name, apiKey);
       moveMatchListView(name);
     } catch (err) {
-      alert('can not find the summoner');
+      if (err === 403) {
+        alert('The api key is Wrong or Expired');
+        localStorage.removeItem('lol-token');
+        dispatch(setApiKey(''));
+      } else if (err === 404) {
+        alert('can not find the summoner');
+      }
     }
   }
 

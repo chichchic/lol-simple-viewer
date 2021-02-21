@@ -17,7 +17,7 @@ export default function App() {
     return key;
   });
   const [hasJson, setHasJson] = useState('init');
-  const [hasKey, setHasKey] = useState(null);
+  const [hasKey, setHasKey] = useState('');
   useEffect(() => {
     for (const key in dragonJson) {
       if (!dragonJson[key]) {
@@ -35,11 +35,9 @@ export default function App() {
   }, [dragonJson, dispatch]);
 
   useEffect(() => {
-    if (apiKey) {
-      setHasKey(apiKey);
-    }
+    setHasKey(apiKey);
   }, [apiKey]);
-  if (!hasKey) {
+  if (hasKey === '') {
     return <ApiKey />;
   }
   switch (hasJson) {

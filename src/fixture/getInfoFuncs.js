@@ -11,6 +11,10 @@ function wait(time) {
 
 async function requestWithRiotToken(url, token, isRetry = false) {
   try {
+    const reg = /^[A-Za-z0-9-+]{42}$/;
+    if (!reg.test(token)) {
+      throw 403;
+    }
     const res = await fetch(url, {
       method: 'GET',
       headers: {
@@ -18,6 +22,7 @@ async function requestWithRiotToken(url, token, isRetry = false) {
         'X-Riot-Token': token,
       },
     });
+
     if (res.status === 429) {
       await wait(2 * 60 * 1000);
       return requestWithRiotToken(url, token, true);
