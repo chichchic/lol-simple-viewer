@@ -1,11 +1,33 @@
+@mixin fake-element($width, $height) {
+  animation: 2s infinite bgcolorchange;
+  opacity: 0.5;
+  width: $width;
+  height: $height;
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: relative;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 150%;
+    width: 90%;
+    background: #f2f2f2;
+    animation: 2s infinite transitionX;
+  }
+}
+
 .rank {
   width: 50rem;
   & .box {
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: white;
     border: gray 1px solid;
     padding: 1rem 0.5rem;
+    height: 10rem;
     &:not(:last-child) {
       margin-bottom: 1rem;
     }
@@ -15,12 +37,13 @@
         margin-bottom: 0.3rem;
       }
       & .queue-type {
+        margin: 0;
         font-size: 2rem;
         font-weight: bold;
       }
       & .score {
         display: flex;
-        & > div:not(.divison) {
+        & > strong {
           font-size: 1rem;
           font-weight: bold;
         }
@@ -30,5 +53,36 @@
       width: 7rem;
       height: 7rem;
     }
+    & .fake_img {
+      @include fake-element(7rem, 7rem);
+    }
+    & .fake_title {
+      @include fake-element(15rem, 2rem);
+    }
+    & .fake_description {
+      margin-top: 1rem;
+      @include fake-element(7rem, 2rem);
+    }
+  }
+}
+
+@keyframes bgcolorchange {
+  0% {
+    background: #f2f2f2;
+  }
+  60% {
+    background: lightgray;
+  }
+  100% {
+    background: lightgray;
+  }
+}
+
+@keyframes transitionX {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(1000px);
   }
 }

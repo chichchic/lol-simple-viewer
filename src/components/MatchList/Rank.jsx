@@ -7,7 +7,20 @@ import './Rank.scss';
 
 const emblemUrl = '../img/emblems/Emblem_';
 
+function fakeRank() {
+  return (
+    <div className="box">
+      <div className="fake_img"></div>
+      <div className="info">
+        <div className="fake_title"></div>
+        <div className="fake_description"></div>
+      </div>
+    </div>
+  );
+}
+
 export default function Rank({ leagueInfo }) {
+  return <div className="rank">{fakeRank()}</div>;
   return (
     <div className="rank">
       {leagueInfo.map(
@@ -20,16 +33,16 @@ export default function Rank({ leagueInfo }) {
                 className="rank-emblem"
               />
               <div className="info">
-                <div className="queue-type">{queueType}</div>
-                <div className="tier">Tier:&nbsp;{tier + rank}</div>
-                <div className="league-points">
+                <h2 className="queue-type">{queueType}</h2>
+                <p className="tier">Tier:&nbsp;{tier + rank}</p>
+                <p className="league-points">
                   League Points:&nbsp;{leaguePoints}
-                </div>
-                <div className="score">
-                  <div className="wins">WIN:&nbsp;{wins}</div>
+                </p>
+                <p className="score">
+                  <strong className="wins">WIN:&nbsp;{wins}</strong>
                   <span className="division">&nbsp;|&nbsp;</span>
-                  <div className="losses">LOSE:&nbsp;{losses}</div>
-                </div>
+                  <strong className="losses">LOSE:&nbsp;{losses}</strong>
+                </p>
               </div>
             </article>
           );
