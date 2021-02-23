@@ -19,8 +19,13 @@ export default function MatchList() {
   const [account, setAccount] = useState(null);
   const [iconId, setIconId] = useState(null);
   const [level, setLevel] = useState(null);
-  const [leagueInfo, setLeagueInfo] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [soloLeagueInfo, setSoloLeagueInfo] = useState({
+    queueType: 'Ranked Solo',
+  });
+  const [flexLeagueInfo, setFlexLeagueInfo] = useState({
+    queueType: 'Ranked Flex',
+  });
   const apiKey = useSelector(({ apiKey: { key } }) => {
     return key;
   });
@@ -39,7 +44,22 @@ export default function MatchList() {
         setAccount(accountId);
         setIconId(profileIconId);
         setLevel(summonerLevel);
-        setLeagueInfo(league);
+        league.forEach((leagueInfo) => {
+          if (leagueInfo.queueType === 'RANKED_SOLO_5x5') {
+            setSoloLeagueInfo(
+              Object.assign(leagueInfo, {
+                queueType: 'Ranked Solo',
+              }),
+            );
+          } else if (leagueInfo.queueType === 'RANKED_FLEX_SR') {
+            setFlexLeagueInfo(
+              Object.assign(leagueInfo, {
+                queueType: 'Ranked Flex',
+              }),
+            );
+          }
+        });
+        setLoading(false);
       } catch (error) {
       } finally {
         setLoading(false);
@@ -50,12 +70,14 @@ export default function MatchList() {
       setAccount(null);
       setIconId(null);
       setLevel(null);
-      setLeagueInfo(null);
+      setSoloLeagueInfo({
+        queueType: 'Ranked Solo',
+      });
+      setFlexLeagueInfo({
+        queueType: 'Ranked Flex',
+      });
     };
   }, [name]);
-  if (loading) {
-    return <Loading />;
-  }
   return (
     <section className="match-list">
       <div className="top-nav">
@@ -67,7 +89,8 @@ export default function MatchList() {
           {iconId && level && (
             <Profile profileIconId={iconId} summonerLevel={level} />
           )}
-          {leagueInfo && <Rank leagueInfo={leagueInfo} />}
+          {<Rank loading={loading} {...soloLeagueInfo} />}
+          {<Rank loading={loading} {...flexLeagueInfo} />}
         </div>
 
         <div className="right-content">
