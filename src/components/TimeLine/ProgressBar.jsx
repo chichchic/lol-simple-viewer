@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-//TODO: undersocre 필요없을 경우 삭제할 것. loadash와 비교하여 사용할 것!
-import * as _ from 'underscore';
 
 import './ProgressBar.scss';
 
