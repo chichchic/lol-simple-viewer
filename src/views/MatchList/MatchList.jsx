@@ -7,7 +7,6 @@ import TextLink from 'components/common/TextLink';
 import SummonerSearchBar from 'components/common/SummonerSearchBar';
 import Profile from 'components/MatchList/Profile';
 import Rank from 'components/MatchList/Rank';
-import Loading from '../common/Loading';
 
 import './MatchList.scss';
 
@@ -59,25 +58,13 @@ export default function MatchList() {
             );
           }
         });
-        setLoading(false);
       } catch (error) {
       } finally {
         setLoading(false);
       }
     }
     getJsonDatas();
-    return () => {
-      setAccount(null);
-      setIconId(null);
-      setLevel(null);
-      setSoloLeagueInfo({
-        queueType: 'Ranked Solo',
-      });
-      setFlexLeagueInfo({
-        queueType: 'Ranked Flex',
-      });
-    };
-  }, [name]);
+  }, [name, apiKey]);
   return (
     <section className="match-list">
       <div className="top-nav">
