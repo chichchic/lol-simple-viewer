@@ -86,9 +86,13 @@ export default function MatchList() {
       </div>
       <div className="content">
         <div className="left-content">
-          {iconId && level && (
-            <Profile profileIconId={iconId} summonerLevel={level} />
-          )}
+          {
+            <Profile
+              loading={loading}
+              profileIconId={iconId}
+              summonerLevel={level}
+            />
+          }
           {<Rank loading={loading} {...soloLeagueInfo} />}
           {<Rank loading={loading} {...flexLeagueInfo} />}
         </div>

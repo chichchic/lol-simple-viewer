@@ -1,0 +1,40 @@
+@mixin fake-element($time, $width, $height) {
+  animation: $time infinite bgcolorchange;
+  opacity: 0.5;
+  width: $width;
+  height: $height;
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: relative;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 150%;
+    width: 90%;
+    background: #f2f2f2;
+    animation: 2s infinite transitionX;
+  }
+}
+
+@keyframes bgcolorchange {
+  0% {
+    background: #f2f2f2;
+  }
+  60% {
+    background: lightgray;
+  }
+  100% {
+    background: lightgray;
+  }
+}
+
+@keyframes transitionX {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(1000px);
+  }
+}

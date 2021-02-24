@@ -1,22 +1,4 @@
-@mixin fake-element($width, $height) {
-  animation: 2s infinite bgcolorchange;
-  opacity: 0.5;
-  width: $width;
-  height: $height;
-  position: relative;
-  overflow: hidden;
-  &::before {
-    content: '';
-    position: relative;
-    display: block;
-    top: 0;
-    left: 0;
-    height: 150%;
-    width: 90%;
-    background: #f2f2f2;
-    animation: 2s infinite transitionX;
-  }
-}
+@import 'assets/styles/common/fakeMixin.scss';
 
 .rank {
   width: 50rem;
@@ -54,35 +36,14 @@
       height: 7rem;
     }
     & .fake_img {
-      @include fake-element(7rem, 7rem);
+      @include fake-element(2s, 7rem, 7rem);
     }
     & .fake_title {
-      @include fake-element(15rem, 2rem);
+      @include fake-element(2s, 15rem, 2rem);
     }
     & .fake_description {
       margin-top: 1rem;
-      @include fake-element(7rem, 2rem);
+      @include fake-element(2s, 7rem, 2rem);
     }
-  }
-}
-
-@keyframes bgcolorchange {
-  0% {
-    background: #f2f2f2;
-  }
-  60% {
-    background: lightgray;
-  }
-  100% {
-    background: lightgray;
-  }
-}
-
-@keyframes transitionX {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(1000px);
   }
 }

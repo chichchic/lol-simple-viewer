@@ -1,7 +1,15 @@
+@import 'assets/styles/common/fakeMixin.scss';
+
 .profile {
+  width: 50rem;
+  background-color: white;
+  border: gray 1px solid;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem 0.5rem;
+  margin-bottom: 3rem;
+
   & img {
     width: 8rem;
     height: 8rem;
@@ -15,5 +23,16 @@
     & .level {
       font-size: 3rem;
     }
+  }
+
+  & .fake-img {
+    @include fake-element(2s, 8rem, 8rem);
+  }
+  & .fake-title {
+    @include fake-element(2s, 15rem, 3rem);
+  }
+  & .fake-description {
+    margin-top: 1rem;
+    @include fake-element(2s, 7rem, 3rem);
   }
 }

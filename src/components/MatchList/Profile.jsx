@@ -9,9 +9,23 @@ import './Profile.scss';
 const profileUrl =
   'http://ddragon.leagueoflegends.com/cdn/11.4.1/img/profileicon/';
 
-export default function Profile({ profileIconId, summonerLevel }) {
-  const { name } = useParams();
+function FakePrifile() {
+  return (
+    <article className="profile">
+      <div className="fake-img"></div>
+      <div className="info">
+        <div className="fake-title"></div>
+        <div className="fake-description"></div>
+      </div>
+    </article>
+  );
+}
 
+export default function Profile({ loading, profileIconId, summonerLevel }) {
+  const { name } = useParams();
+  if (loading) {
+    return FakePrifile();
+  }
   return (
     <article className="profile">
       <ImgComponent
@@ -28,6 +42,5 @@ export default function Profile({ profileIconId, summonerLevel }) {
 }
 
 Profile.propTypes = {
-  profileIconId: PropTypes.number.isRequired,
-  summonerLevel: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
