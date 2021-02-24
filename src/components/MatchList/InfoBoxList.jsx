@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import InfoBox from './InfoBox';
@@ -8,31 +8,33 @@ import { getmatchList, getMatchDto } from 'fixture/getInfoFuncs.js';
 
 const gettingListNum = 5;
 
-export default function InfoBoxList({ account, showMore }) {
+function ShowMoreButton(canGetMoreData, onClick) {
+  if (canGetMoreData) {
+    return (
+      <button className="show-more-btn" onClick={onClick}>
+        SHOW MORE
+      </button>
+    );
+  } else {
+    return <p className="show-more-btn">END DATA</p>;
+  }
+}
+
+export default function InfoBoxList({ account }) {
   const apiKey = useSelector(({ apiKey: { key } }) => {
     return key;
   });
   const [matchesArr, setMatchesArr] = useState([]);
   const [canGetMoreData, setCanGetMoreData] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [beginIndex, setBeginIndex] = useState(0);
-  //TODO: totalgame
+  const [isLoading, setIsLoading] = useState(true);
+  const beginIndex = useRef(0);
 
-  useEffect(() => {
-    if (account) {
-      addMatchList();
-    }
-    return () => {
-      setMatchesArr([]);
-      setBeginIndex(0);
-    };
-  }, [account]);
-  async function addMatchList() {
-    if (isLoading) return;
+  const addMatchList = useCallback(async () => {
     try {
+      const { current } = beginIndex;
       setIsLoading(true);
       const matchListData = await getmatchList(
-        beginIndex,
+        current,
         account,
         gettingListNum,
         apiKey,
@@ -46,33 +48,33 @@ export default function InfoBoxList({ account, showMore }) {
         });
         const matchInfos = await Promise.all(promises);
         setMatchesArr((oldInfo) => [...oldInfo, ...matchInfos]);
-        setBeginIndex(endIndex);
+        beginIndex.current = 0;
       }
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [apiKey, account]);
+  //TODO: totalgame
+
+  useEffect(() => {
+    if (account !== null) {
+      addMatchList();
+    }
+    return () => {
+      setMatchesArr([]);
+      beginIndex.current = 0;
+    };
+  }, [account]);
+
   return (
     <article className="info-box-list">
       {matchesArr.map((gameInfo, index) => (
         <InfoBox {...gameInfo} key={index} />
       ))}
       {isLoading && <Loading />}
-      {showMoreButton(canGetMoreData, addMatchList)}
+      {ShowMoreButton(canGetMoreData, addMatchList)}
     </article>
   );
-}
-
-function showMoreButton(canGetMoreData, onClick) {
-  if (canGetMoreData) {
-    return (
-      <button className="show-more-btn" onClick={onClick}>
-        SHOW MORE
-      </button>
-    );
-  } else {
-    return <p className="show-more-btn">END DATA</p>;
-  }
 }
