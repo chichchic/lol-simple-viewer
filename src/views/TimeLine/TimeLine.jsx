@@ -118,9 +118,7 @@ function extractEvents(events, moveLogs, itemLogs, eventLogs, dragonList) {
         addEventLog(eventLogs, event);
         break;
       case 'BUILDING_KILL':
-        event.teamId === 200 &&
-          console.log(event.laneType, event.towerType, event.position);
-        addEventLog(eventLogs, event);
+        event.teamId === 200 && addEventLog(eventLogs, event);
         addMoveLog(
           moveLogs,
           { timestamp: event.timestamp, participantId: event.killerId },
@@ -221,11 +219,13 @@ export default function TimeLine() {
   }
   return (
     <section className="time-line">
-      <ItemBoard
-        itemLogs={itemLogs}
-        participantChamps={participantChamps}
-        curTime={curTime}
-      />
+      <div className="left">
+        <ItemBoard
+          itemLogs={itemLogs}
+          participantChamps={participantChamps}
+          curTime={curTime}
+        />
+      </div>
       <div className="center">
         <MapBoard
           mapId={map}
@@ -240,11 +240,13 @@ export default function TimeLine() {
           setCurTime={setCurTime}
         />
       </div>
-      <Board
-        eventLogs={eventLogs}
-        participantChamps={participantChamps}
-        curTime={curTime}
-      />
+      <div className="right">
+        <Board
+          eventLogs={eventLogs}
+          participantChamps={participantChamps}
+          curTime={curTime}
+        />
+      </div>
     </section>
   );
 }

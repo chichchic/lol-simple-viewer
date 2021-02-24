@@ -21,7 +21,6 @@
     grid-row: 1/-1;
   }
   & img {
-    width: 2rem;
-    height: 2rem;
+    width: calc(100% / 7);
   }
 }
