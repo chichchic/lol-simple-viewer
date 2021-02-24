@@ -9,7 +9,7 @@ const blankSrc = {
   src: '../img/blank.png',
   alt: 'empty',
 };
-function findSrc(itemJson, itemNum) {
+function makeImgAttribute(itemJson, itemNum) {
   const itemInfo = itemJson[itemNum];
   if (itemInfo) {
     return {
@@ -24,7 +24,7 @@ export default function Item({ itemNum, className }) {
   const itemJson = useSelector((state) => state.json.item.data);
   const [imgSrc, setImgSrc] = useState(blankSrc);
   useEffect(() => {
-    setImgSrc(findSrc(itemJson, itemNum));
+    setImgSrc(makeImgAttribute(itemJson, itemNum));
   }, [itemJson, itemNum]);
   //BUG: 오른 강화아이템의 경우 data-dragon에서 이미지를 제공해주고 있지 않음. 이에 따라 버그가 발생됨
   //관련 링크: https://github.com/RiotGames/developer-relations/issues/419
