@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import ItemBoard from 'components/TimeLine/ItemBoard';
 import MapBoard from 'components/TimeLine/MapBoard';
@@ -9,6 +9,7 @@ import PlayerController from 'components/TimeLine/PlayerController';
 import Loading from '../common/Loading';
 
 import { getTimeLine, getMatchDto } from 'fixture/getInfoFuncs.js';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 import './TimeLine.scss';
 
@@ -189,6 +190,7 @@ export default function TimeLine() {
   const apiKey = useSelector(({ apiKey: { key } }) => {
     return key;
   });
+  const history = useHistory();
   const { matchId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [endTime, setEndTime] = useState(false);
@@ -219,6 +221,9 @@ export default function TimeLine() {
   }
   return (
     <section className="time-line">
+      <button className="go-back" onClick={() => history.goBack()}>
+        <AiOutlineArrowLeft />
+      </button>
       <div className="left">
         <ItemBoard
           itemLogs={itemLogs}

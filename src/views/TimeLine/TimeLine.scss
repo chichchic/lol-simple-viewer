@@ -1,7 +1,15 @@
 .time-line {
+  position: relative;
   display: grid;
   padding: 3rem;
   column-gap: 2rem;
   grid-template-columns: 2fr 5fr 3fr;
   user-select: none;
+  & .go-back {
+    position: absolute;
+    background-color: transparent;
+    font-size: 2rem;
+    top: 1rem;
+    left: 1rem;
+  }
 }
