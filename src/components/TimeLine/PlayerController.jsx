@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import ProgressBar from './ProgressBar';
@@ -18,7 +18,9 @@ function useInterval(callback, delay) {
     }
     if (delay !== null) {
       let id = setInterval(tick, delay);
-      return () => clearInterval(id);
+      return () => {
+        clearInterval(id);
+      };
     }
   }, [delay]);
 }
@@ -35,7 +37,7 @@ export default function PlayerController({ totalTime, curTime, setCurTime }) {
         let nextTime = prevTime + 1000;
         if (nextTime >= totalTime) {
           nextTime = totalTime;
-          setIsRunning(false);
+          setDelay(null);
           setControllerState(2);
         }
         return nextTime;
@@ -44,10 +46,18 @@ export default function PlayerController({ totalTime, curTime, setCurTime }) {
     isRunning ? delay : null,
   );
 
-  function curTimeController(time) {
-    setCurTime(time);
-  }
-  function onClickControllerButton() {
+  const curTimeController = useCallback(
+    (time) => {
+      if (controllerState === 2) {
+        setDelay(10);
+        setControllerState(0);
+      }
+      setCurTime(time);
+    },
+    [controllerState],
+  );
+
+  const onClickControllerButton = useCallback(() => {
     setControllerState((oldVal) => {
       if (oldVal === 0) {
         setIsRunning(false);
@@ -59,7 +69,7 @@ export default function PlayerController({ totalTime, curTime, setCurTime }) {
       setIsRunning(true);
       return 0;
     });
-  }
+  }, []);
   return (
     <div>
       <ProgressBar
