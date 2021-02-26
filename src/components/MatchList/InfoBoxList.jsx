@@ -48,7 +48,7 @@ export default function InfoBoxList({ account }) {
         });
         const matchInfos = await Promise.all(promises);
         setMatchesArr((oldInfo) => [...oldInfo, ...matchInfos]);
-        beginIndex.current = 0;
+        beginIndex.current += gettingListNum;
       }
     } catch (error) {
       console.error(error);
