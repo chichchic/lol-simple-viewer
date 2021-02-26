@@ -26,7 +26,7 @@ export default function ChampPortrait({
   championId,
   champLevel,
   className,
-  left = 0,
+  right = 0,
   top = 0,
   borderColor,
 }) {
@@ -42,7 +42,7 @@ export default function ChampPortrait({
   return (
     <article
       className={className || 'champ-portriat-component'}
-      style={{ left, top }}
+      style={{ right, top }}
     >
       {champLevel && <div className="champ-level">{champLevel}</div>}
       <ImgComponent

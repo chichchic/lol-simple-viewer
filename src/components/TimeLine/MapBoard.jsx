@@ -24,7 +24,7 @@ function drawBuilding(building, ratio, lane) {
       <div
         key={lane + key}
         className={`building ${lane} ${key}`}
-        style={{ left: 800 - x * ratio, top: y * ratio }}
+        style={{ right: (x - 193) * ratio, top: (y - 10) * ratio }}
       ></div>
     );
   });
@@ -36,12 +36,12 @@ export default function MapBoard({
   curTime,
   eventLogs,
 }) {
-  const ref = useRef(null);
+  const ref = useRef();
   const [positions, setPositions] = useState(Array(10).fill({ x: 0, y: 0 }));
   const [ratio, setRatio] = useState(1);
   useEffect(() => {
-    ref.current && setRatio(ref.current.offsetWidth / 15000);
-  }, [ref.current]);
+    setRatio(ref.current.offsetWidth / 14865);
+  });
   useEffect(() => {
     let curkey = 0;
     for (const key in moveFrame) {
@@ -69,8 +69,8 @@ export default function MapBoard({
           championId={participantChamps[key]}
           className="map-champ-portrait"
           key={key}
-          left={800 - positions[index].y * ratio}
-          top={positions[index].x * ratio}
+          right={(positions[index].y - 349) * ratio}
+          top={(positions[index].x + 197) * ratio}
           borderColor={index < 5 ? '#3388ff' : '#ff88aa'}
         />
       ))}
