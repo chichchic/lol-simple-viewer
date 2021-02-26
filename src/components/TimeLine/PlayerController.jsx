@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import ProgressBar from './ProgressBar';
 import ControllerButton from './ControllerButton';
 
-import './PlayerController.scss';
-
 function useInterval(callback, delay) {
   const savedCallback = useRef();
   useEffect(() => {
@@ -71,7 +69,7 @@ export default function PlayerController({ totalTime, curTime, setCurTime }) {
     });
   }, []);
   return (
-    <div>
+    <div className="player-controller">
       <ProgressBar
         totalTime={totalTime}
         curTime={curTime}
