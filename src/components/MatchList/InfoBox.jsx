@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
+import GameInfo from './GameInfo';
 import ChampInfo from './Champ/ChampInfo';
 import ChampTeam from './Champ/ChampTeam';
 import ItemBox from './Item/ItemBox';
@@ -98,6 +99,9 @@ function makeTeam(identities, participants, name) {
 
 export default function InfoBox({
   gameId,
+  gameCreation,
+  queueId,
+  gameDuration,
   participantIdentities,
   participants,
 }) {
@@ -108,7 +112,19 @@ export default function InfoBox({
   const [redTeam, setRedTeam] = useState([]);
   const [itemBox, setItemBox] = useState([0, 0, 0, 0, 0, 0, 0]);
   const [champInfo, setChampInfo] = useState(initChmpInfo);
-  const [amIWin, setAmIWin] = useState(null);
+  const [gameStatus, setGameStatus] = useState(null);
+
+  const backgroundColors = useRef({
+    Remake: {
+      backgroundColor: '#888888',
+    },
+    Victory: {
+      backgroundColor: '#3388ff',
+    },
+    Defeat: {
+      backgroundColor: '#ff88aa',
+    },
+  });
 
   useEffect(() => {
     const [blue, red, items, champ, win] = makeTeam(
@@ -120,10 +136,24 @@ export default function InfoBox({
     setRedTeam(red);
     setItemBox(items);
     setChampInfo((old) => ({ ...old, ...champ }));
-    setAmIWin(win);
+    setGameStatus(() => {
+      if (gameDuration < 300) {
+        return 'Remake';
+      }
+      if (win) {
+        return 'Victory';
+      }
+      return 'Defeat';
+    });
   }, [participantIdentities, participants, name]);
   return (
-    <article className="info-box" style={amIWin ? isWin : isLose}>
+    <article className="info-box" style={backgroundColors.current[gameStatus]}>
+      <GameInfo
+        queueId={queueId}
+        gameCreation={gameCreation}
+        gameDuration={gameDuration}
+        status={gameStatus}
+      />
       <ChampInfo {...champInfo} />
       <ItemBox itemArray={itemBox} grid={true} />
       <ChampTeam teamInfo={blueTeam} />
@@ -137,10 +167,3 @@ export default function InfoBox({
     </article>
   );
 }
-
-const isWin = {
-  backgroundColor: '#3388ff',
-};
-const isLose = {
-  backgroundColor: '#ff88aa',
-};
