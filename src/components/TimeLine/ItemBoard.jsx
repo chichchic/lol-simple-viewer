@@ -16,12 +16,13 @@ function ItemRow(item, index, participantChamps) {
       style={{
         backgroundColor: index < 5 ? '#3388ff' : '#ff88aa',
       }}
+      key={index}
     >
       <ChampPortrait
         championId={participantChamps[index + 1]}
         className="champ-portrait"
       />
-      <ItemBox itemArray={item} key={index} />
+      <ItemBox itemArray={item} />
     </article>
   );
 }
