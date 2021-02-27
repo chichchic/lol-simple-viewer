@@ -119,7 +119,7 @@ function extractEvents(events, moveLogs, itemLogs, eventLogs, dragonList) {
         addEventLog(eventLogs, event);
         break;
       case 'BUILDING_KILL':
-        event.teamId === 200 && addEventLog(eventLogs, event);
+        addEventLog(eventLogs, event);
         addMoveLog(
           moveLogs,
           { timestamp: event.timestamp, participantId: event.killerId },
