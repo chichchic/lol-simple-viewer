@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/lol-simple-viewer/static/css/main.f08ddb19.chunk.css",
-    "main.js": "/lol-simple-viewer/static/js/main.56b03204.chunk.js",
-    "main.js.map": "/lol-simple-viewer/static/js/main.56b03204.chunk.js.map",
+    "main.js": "/lol-simple-viewer/static/js/main.5b5bf154.chunk.js",
+    "main.js.map": "/lol-simple-viewer/static/js/main.5b5bf154.chunk.js.map",
     "runtime-main.js": "/lol-simple-viewer/static/js/runtime-main.ea904209.js",
     "runtime-main.js.map": "/lol-simple-viewer/static/js/runtime-main.ea904209.js.map",
     "static/js/2.898ad46a.chunk.js": "/lol-simple-viewer/static/js/2.898ad46a.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.ea904209.js",
     "static/js/2.898ad46a.chunk.js",
     "static/css/main.f08ddb19.chunk.css",
-    "static/js/main.56b03204.chunk.js"
+    "static/js/main.5b5bf154.chunk.js"
   ]
 }
