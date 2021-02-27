@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "https://kr.api.riotgames.com",
+  "homepage": "http://chichchic.github.io/lol-simple-viewer",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/user-event": "^12.1.10",
+    "gh-pages": "^3.1.0",
     "http-proxy-middleware": "^1.0.6",
+    "install": "^0.13.0",
     "jest-styled-components": "^7.0.3",
     "node-sass": "4.14.1",
     "react": "^17.0.1",
@@ -28,7 +31,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
