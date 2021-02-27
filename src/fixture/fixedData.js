@@ -1,6 +1,58 @@
 export const trinketList = [2052, 3340, 3363, 3364];
 //teamId 100 is blue team
 export const BuildingPosition11 = {
+  frame: {
+    blue: {
+      NEXUS_TURRET: {
+        1: true,
+        2: true,
+        3: true,
+      },
+      TOP_LANE: {
+        OUTER_TURRET: true,
+        INNER_TURRET: true,
+        BASE_TURRET: true,
+        UNDEFINED_TURRET: true,
+      },
+      MID_LANE: {
+        OUTER_TURRET: true,
+        INNER_TURRET: true,
+        BASE_TURRET: true,
+        UNDEFINED_TURRET: true,
+      },
+      BOT_LANE: {
+        OUTER_TURRET: true,
+        INNER_TURRET: true,
+        BASE_TURRET: true,
+        UNDEFINED_TURRET: true,
+      },
+    },
+    red: {
+      NEXUS_TURRET: {
+        1: true,
+        2: true,
+        3: true,
+      },
+      TOP_LANE: {
+        OUTER_TURRET: true,
+        INNER_TURRET: true,
+        BASE_TURRET: true,
+        UNDEFINED_TURRET: true,
+      },
+      MID_LANE: {
+        OUTER_TURRET: true,
+        INNER_TURRET: true,
+        BASE_TURRET: true,
+        UNDEFINED_TURRET: true,
+      },
+      BOT_LANE: {
+        OUTER_TURRET: true,
+        INNER_TURRET: true,
+        BASE_TURRET: true,
+        UNDEFINED_TURRET: true,
+      },
+    },
+  },
   blue: {
     NEXUS_TURRET: {
       1: { x: 1748, y: 2270 },
@@ -53,6 +105,34 @@ export const BuildingPosition11 = {
   },
 };
 export const BuildingPosition12 = {
+  frame: {
+    blue: {
+      NEXUS_TURRET: {
+        1: true,
+        2: true,
+        3: true,
+      },
+      MID_LANE: {
+        OUTER_TURRET: true,
+        INNER_TURRET: true,
+        BASE_TURRET: true,
+        UNDEFINED_TURRET: true,
+      },
+    },
+    red: {
+      NEXUS_TURRET: {
+        1: true,
+        2: true,
+        3: true,
+      },
+      MID_LANE: {
+        OUTER_TURRET: true,
+        INNER_TURRET: true,
+        BASE_TURRET: true,
+        UNDEFINED_TURRET: true,
+      },
+    },
+  },
   blue: {
     NEXUS_TURRET: {
       1: { x: 1748, y: 2270 },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
@@ -101,7 +101,14 @@ function addEventLog(
   }
 }
 
-function extractEvents(events, moveLogs, itemLogs, eventLogs, dragonList) {
+function extractEvents(
+  events,
+  moveLogs,
+  itemLogs,
+  eventLogs,
+  dragonList,
+  accDestroyedBuilding,
+) {
   events.forEach((event) => {
     switch (event.type) {
       case 'CHAMPION_KILL':
@@ -125,6 +132,11 @@ function extractEvents(events, moveLogs, itemLogs, eventLogs, dragonList) {
           { timestamp: event.timestamp, participantId: event.killerId },
           event.position,
         );
+        (function addAccDestroyedBuilding() {
+          const { teamId, towerType, laneType, timestamp } = event;
+          accDestroyedBuilding.last.push({ teamId, towerType, laneType });
+          accDestroyedBuilding[timestamp] = [...accDestroyedBuilding.last];
+        })();
         break;
       case 'ELITE_MONSTER_KILL':
         if (event.monsterType === 'DRAGON')
@@ -158,13 +170,21 @@ function makeLogs({ frames }, { gameDuration, participants }) {
   const moveLogs = {};
   const itemLogs = {};
   const eventLogs = {};
+  const accDestroyedBuilding = { last: [], 0: [] };
   const dragonList = [];
   frames.forEach(({ events, participantFrames, timestamp }) => {
     for (const key in participantFrames) {
       const { participantId, position } = participantFrames[key];
       addMoveLog(moveLogs, { timestamp, participantId }, position);
     }
-    extractEvents(events, moveLogs, itemLogs, eventLogs, dragonList);
+    extractEvents(
+      events,
+      moveLogs,
+      itemLogs,
+      eventLogs,
+      dragonList,
+      accDestroyedBuilding,
+    );
   });
   participants.forEach(
     ({
@@ -181,7 +201,14 @@ function makeLogs({ frames }, { gameDuration, participants }) {
       });
     },
   );
-  return [endTime, participantChamps, moveLogs, itemLogs, eventLogs];
+  return [
+    endTime,
+    participantChamps,
+    moveLogs,
+    itemLogs,
+    eventLogs,
+    accDestroyedBuilding,
+  ];
 }
 
 //TODO: 뒤로가기
@@ -200,6 +227,7 @@ export default function TimeLine() {
   const [participantChamps, setParticipantChamps] = useState(false);
   const [curTime, setCurTime] = useState(0);
   const [map, setMap] = useState();
+  const accDestBuild = useRef();
 
   useEffect(() => {
     (async () => {
@@ -207,7 +235,11 @@ export default function TimeLine() {
       const matchDto = await getMatchDto(matchId, apiKey);
       const { mapId } = matchDto;
       setMap(mapId);
-      const [end, champ, move, item, event] = makeLogs(timeLine, matchDto);
+      const [end, champ, move, item, event, accDestroyedBuilding] = makeLogs(
+        timeLine,
+        matchDto,
+      );
+      accDestBuild.current = accDestroyedBuilding;
       setEndTime(end);
       setMoveLogs(move);
       setItemLogs(item);
@@ -237,7 +269,7 @@ export default function TimeLine() {
           moveFrame={moveLogs}
           participantChamps={participantChamps}
           curTime={curTime}
-          eventLogs={eventLogs}
+          accDestBuild={accDestBuild.current}
         />
         <PlayerController
           totalTime={endTime}
