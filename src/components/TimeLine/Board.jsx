@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import BoardLine from './BoardLine';
 
 import './Board.scss';
 
 export default function Board({ eventLogs, participantChamps, curTime }) {
+  const end = useRef();
+  useEffect(() => {
+    end.current.scrollIntoView();
+  });
   if (!eventLogs) return <div>loading</div>;
   function showBoadLine() {
     const eventLine = [];
@@ -21,5 +25,10 @@ export default function Board({ eventLogs, participantChamps, curTime }) {
     }
     return eventLine;
   }
-  return <article className="board">{showBoadLine()}</article>;
+  return (
+    <article className="board">
+      {showBoadLine()}
+      <div ref={end}></div>
+    </article>
+  );
 }
