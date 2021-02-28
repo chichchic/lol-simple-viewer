@@ -249,7 +249,7 @@ export default function TimeLine() {
       setParticipantChamps(champ);
       setIsLoading(true);
     })();
-  }, [matchId]);
+  }, [matchId, apiKey]);
   if (!isLoading) {
     return <Loading />;
   }

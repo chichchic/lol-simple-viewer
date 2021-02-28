@@ -72,7 +72,7 @@ export default function InfoBoxList({ account }) {
       setMatchesArr([]);
       beginIndex.current = 0;
     };
-  }, [account]);
+  }, [account, addMatchList]);
 
   return (
     <article className="info-box-list">

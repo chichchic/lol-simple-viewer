@@ -17,7 +17,7 @@ export default function ApiKey() {
     if (token !== null) {
       dispatch(setApiKey(token));
     }
-  }, []);
+  }, [dispatch]);
   function registKey() {
     if (key === '') {
       return;

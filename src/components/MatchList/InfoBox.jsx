@@ -145,7 +145,7 @@ export default function InfoBox({
       }
       return 'Defeat';
     });
-  }, [participantIdentities, participants, name]);
+  }, [gameDuration, participantIdentities, participants, name]);
   return (
     <article className="info-box" style={backgroundColors.current[gameStatus]}>
       <GameInfo

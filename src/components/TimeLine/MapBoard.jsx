@@ -94,7 +94,7 @@ export default function MapBoard({
         ),
       );
     };
-  }, [curTime]);
+  }, [curTime, accDestBuild, mapId, moveFrame]);
 
   if (!participantChamps || !mapId) return <div>loading</div>;
   return (
