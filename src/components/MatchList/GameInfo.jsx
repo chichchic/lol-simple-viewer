@@ -45,12 +45,11 @@ export default function GameInfo({
   });
 
   const findGameType = useCallback((queueId) => {
-    const output = [...queueType].find((type) => type.queueId === queueId)
-      .description;
-    if (output === null) {
+    const output = [...queueType].find((type) => type.queueId === queueId);
+    if (output === undefined) {
       return '';
     }
-    return output.slice(0, output.length - 6);
+    return output.description.slice(0, output.length - 6);
   });
   return (
     <article className="game-info">

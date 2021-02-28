@@ -231,8 +231,10 @@ export default function TimeLine() {
 
   useEffect(() => {
     (async () => {
-      const timeLine = await getTimeLine(matchId, apiKey);
-      const matchDto = await getMatchDto(matchId, apiKey);
+      const timeLineJSON = await getTimeLine(matchId, apiKey);
+      const timeLine = JSON.parse(timeLineJSON);
+      const matchDtoJSON = await getMatchDto(matchId, apiKey);
+      const matchDto = JSON.parse(matchDtoJSON);
       const { mapId } = matchDto;
       setMap(mapId);
       const [end, champ, move, item, event, accDestroyedBuilding] = makeLogs(

@@ -33,12 +33,13 @@ export default function InfoBoxList({ account }) {
     try {
       const { current } = beginIndex;
       setIsLoading(true);
-      const matchListData = await getmatchList(
+      const matchListDataJSON = await getmatchList(
         current,
         account,
         gettingListNum,
         apiKey,
       );
+      const matchListData = JSON.parse(matchListDataJSON);
       const { matches, endIndex, totalGames } = matchListData;
       if (endIndex === totalGames) {
         setCanGetMoreData(false);
@@ -47,8 +48,13 @@ export default function InfoBoxList({ account }) {
           return getMatchDto(gameId, apiKey);
         });
         const matchInfos = await Promise.all(promises);
-        setMatchesArr((oldInfo) => [...oldInfo, ...matchInfos]);
-        beginIndex.current += gettingListNum;
+        setMatchesArr((oldInfo) => [
+          ...oldInfo,
+          ...matchInfos.map((jsonData) => {
+            return JSON.parse(jsonData);
+          }),
+        ]);
+        beginIndex.current = endIndex;
       }
     } catch (error) {
       console.error(error);

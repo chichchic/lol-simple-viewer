@@ -33,13 +33,11 @@ export default function MatchList() {
       //TODO: 예외처리 넣어야함
       try {
         setLoading(true);
-        const {
-          id,
-          profileIconId,
-          accountId,
-          summonerLevel,
-        } = await getsummonerInfo(name, apiKey);
-        const league = await getLeagueInfo(id, apiKey);
+        const summonerJson = await getsummonerInfo(name, apiKey);
+        const summonerInfo = JSON.parse(summonerJson);
+        const { id, profileIconId, accountId, summonerLevel } = summonerInfo;
+        const leagueJosn = await getLeagueInfo(id, apiKey);
+        const league = JSON.parse(leagueJosn);
         setAccount(accountId);
         setIconId(profileIconId);
         setLevel(summonerLevel);

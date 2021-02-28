@@ -1,3 +1,5 @@
+const serverPort = 3000;
+
 function wait(time) {
   alert(
     `if it has too many requests in a short time, it will wait 2 min to request.`,
@@ -15,13 +17,8 @@ async function requestWithRiotToken(url, token, isRetry = false) {
     if (!reg.test(token)) {
       throw 403;
     }
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept-Charset': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'X-Riot-Token': token,
-      },
-    });
+    url = `http://localhost:${serverPort}/${url}&token=${token}`;
+    const res = await fetch(url);
 
     if (res.status === 429) {
       await wait(2 * 60 * 1000);
@@ -38,7 +35,7 @@ async function requestWithRiotToken(url, token, isRetry = false) {
 
 export async function getLeagueInfo(id, token) {
   try {
-    const url = `/lol/league/v4/entries/by-summoner/${id}`;
+    const url = `rank?id=${id}`;
     const res = await requestWithRiotToken(url, token);
     return res;
   } catch (err) {
@@ -48,7 +45,7 @@ export async function getLeagueInfo(id, token) {
 
 export async function getsummonerInfo(name, token) {
   try {
-    const url = `/lol/summoner/v4/summoners/by-name/${name}`;
+    const url = `summoner?name=${name}`;
     const res = await requestWithRiotToken(url, token);
     return res;
   } catch (err) {
@@ -58,7 +55,7 @@ export async function getsummonerInfo(name, token) {
 
 export async function getTimeLine(matchId, token) {
   try {
-    const url = `/lol/match/v4/timelines/by-match/${matchId}`;
+    const url = `timeLines?matchId=${matchId}`;
     const res = await requestWithRiotToken(url, token);
     return res;
   } catch (err) {
@@ -68,7 +65,7 @@ export async function getTimeLine(matchId, token) {
 
 export async function getMatchDto(matchId, token) {
   try {
-    const url = `/lol/match/v4/matches/${matchId}`;
+    const url = `matchInfo?matchId=${matchId}`;
     const res = await requestWithRiotToken(url, token);
     return res;
   } catch (err) {
@@ -83,8 +80,7 @@ export async function getmatchList(
   token,
 ) {
   try {
-    const endIndex = beginIndex + gettingListNum;
-    let url = `/lol/match/v4/matchlists/by-account/${accountId}?beginIndex=${beginIndex}&endIndex=${endIndex}`;
+    let url = `matchList?accountId=${accountId}&start=${beginIndex}&gameCount=${gettingListNum}`;
     const res = await requestWithRiotToken(url, token);
     return res;
   } catch (err) {
