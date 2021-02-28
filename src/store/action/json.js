@@ -25,7 +25,7 @@ export function getJson() {
 function fetchJsonUrl(type) {
   return new Promise(async (resolve, reject) => {
     const res = await fetch(
-      `http://ddragon.leagueoflegends.com/cdn/11.4.1/data/en_US/${type}.json`,
+      `https://ddragon.leagueoflegends.com/cdn/11.4.1/data/en_US/${type}.json`,
     );
     if (!res.ok) {
       reject(res.status);

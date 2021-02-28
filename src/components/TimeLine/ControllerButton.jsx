@@ -3,7 +3,7 @@ import React from 'react';
 function playButton() {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://www.w3.org/2000/svg"
       height="24"
       viewBox="0 0 24 24"
       width="24"
@@ -17,7 +17,7 @@ function playButton() {
 function pauseButton() {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://www.w3.org/2000/svg"
       height="24"
       viewBox="0 0 24 24"
       width="24"
@@ -31,7 +31,7 @@ function pauseButton() {
 function replayButton() {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="black"
       width="18px"

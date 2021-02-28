@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "https://kr.api.riotgames.com",
-  "homepage": "http://chichchic.github.io/lol-simple-viewer",
+  "homepage": "https://chichchic.github.io/lol-simple-viewer",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/user-event": "^12.1.10",

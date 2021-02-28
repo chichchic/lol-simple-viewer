@@ -7,7 +7,7 @@ import ImgComponent from '../common/ImgComponent';
 import './Profile.scss';
 
 const profileUrl =
-  'http://ddragon.leagueoflegends.com/cdn/11.4.1/img/profileicon/';
+  'https://ddragon.leagueoflegends.com/cdn/11.4.1/img/profileicon/';
 
 function FakePrifile() {
   return (

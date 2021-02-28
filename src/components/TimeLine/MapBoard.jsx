@@ -97,7 +97,7 @@ export default function MapBoard({
   return (
     <article className="map-board" ref={ref}>
       <ImgComponent
-        src={`http://ddragon.leagueoflegends.com/cdn/6.8.1/img/map/map${mapId}.png`}
+        src={`https://ddragon.leagueoflegends.com/cdn/6.8.1/img/map/map${mapId}.png`}
         alt={'map' + mapId}
         className="mini-map"
       />
