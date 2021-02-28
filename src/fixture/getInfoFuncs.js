@@ -15,7 +15,7 @@ async function requestWithRiotToken(url, token, isRetry = false) {
   try {
     const reg = /^[A-Za-z0-9-+]{42}$/;
     if (!reg.test(token)) {
-      throw 403;
+      throw new Error(403);
     }
     url = `https://localhost:${serverPort}/${url}&token=${token}`;
     const res = await fetch(url);
@@ -25,7 +25,7 @@ async function requestWithRiotToken(url, token, isRetry = false) {
       return requestWithRiotToken(url, token, true);
     }
     if (!res.ok) {
-      throw res.status;
+      throw new Error(res.status);
     }
     return res.json();
   } catch (err) {
