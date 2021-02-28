@@ -32,7 +32,10 @@ export default function ApiKey() {
       <div className="riot-dev-site">
         <p>You can get API-key in here :</p>
         <a href="https://developer.riotgames.com/">
-          <img src="./img/riotLogo.png" alt="riot developer" />
+          <img
+            src="http://localhost:3000/img/riotLogo.png"
+            alt="riot developer"
+          />
         </a>
       </div>
       <div className="api-key--input">

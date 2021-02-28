@@ -6,7 +6,7 @@ import ImgComponent from 'components/common/ImgComponent';
 
 const itemImgUrl = 'https://ddragon.leagueoflegends.com/cdn/11.4.1/img/item/';
 const blankSrc = {
-  src: '../img/blank.png',
+  src: 'http://localhost:3000/img/blank.png',
   alt: 'empty',
 };
 function makeImgAttribute(itemJson, itemNum) {

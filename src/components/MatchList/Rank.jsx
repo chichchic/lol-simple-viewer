@@ -5,7 +5,7 @@ import ImgComponent from '../common/ImgComponent';
 
 import './Rank.scss';
 
-const emblemUrl = '../img/emblems/Emblem_';
+const emblemUrl = 'http://localhost:3000/img/emblems/Emblem_';
 
 function FakeRank() {
   return (

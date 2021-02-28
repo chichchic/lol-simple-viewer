@@ -14,7 +14,7 @@ function champImage(championId, id) {
   if (id === 0) {
     return (
       <div className="board-portrait">
-        <img src="../../img/Turret.jpg" alt="turret" />
+        <img src="http://localhost:3000/img/Turret.jpg" alt="turret" />
       </div>
     );
   } else {
@@ -33,7 +33,7 @@ function eliteMonsterImage(championId, monsterType, monsterSubType) {
     return (
       <div className="board-portrait">
         <img
-          src={'../../img/dragon/' + monsterSubType + '.png'}
+          src={'http://localhost:3000/img/dragon/' + monsterSubType + '.png'}
           alt="minion"
           style={{ borderColor: championId < 6 ? '#3388ff' : '#ff88aa' }}
         />
@@ -43,7 +43,7 @@ function eliteMonsterImage(championId, monsterType, monsterSubType) {
     return (
       <div className="board-portrait">
         <img
-          src="../../img/RIFTHERALD.jpg"
+          src="http://localhost:3000/img/RIFTHERALD.jpg"
           alt="minion"
           style={{ borderColor: championId < 6 ? '#3388ff' : '#ff88aa' }}
         />
@@ -67,7 +67,7 @@ function turretImgage(teamId, buildingType) {
     return (
       <div className="board-portrait">
         <img
-          src="../../img/Turret.jpg"
+          src="http://localhost:3000/img/Turret.jpg"
           alt="Turret"
           style={{ borderColor: teamId === 100 ? '#3388ff' : '#ff88aa' }}
         />
@@ -77,7 +77,7 @@ function turretImgage(teamId, buildingType) {
     return (
       <div className="board-portrait">
         <img
-          src="../../img/Inhibitor.png"
+          src="http://localhost:3000/img/Inhibitor.png"
           alt="Inhibitor"
           style={{ borderColor: teamId === 100 ? '#3388ff' : '#ff88aa' }}
         />

@@ -8,7 +8,7 @@ function findSrc(runeJson, runeNum) {
   for (const { id, icon, name, slots } of runeJson) {
     if (id === runeNum) {
       return {
-        src: `../img/${icon}`,
+        src: `http://localhost:3000/img/${icon}`,
         alt: name,
       };
     }
