@@ -52,7 +52,10 @@ export default function MapBoard({
   const [ratio, setRatio] = useState(1);
   useEffect(() => {
     setRatio(ref.current.offsetWidth / 14865);
-  });
+    window.addEventListener('resize', () => {
+      setRatio(ref.current.offsetWidth / 14865);
+    });
+  }, []);
   useEffect(() => {
     let curkey = 0;
     for (const key in moveFrame) {
