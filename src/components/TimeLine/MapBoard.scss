@@ -15,6 +15,9 @@
       height: 3rem;
     }
   }
+  & .destroyed-building {
+    display: none;
+  }
   & .building {
     position: absolute;
     transform: translate(-50%, -50%);

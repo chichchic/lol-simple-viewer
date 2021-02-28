@@ -117,5 +117,10 @@ export default function BoardLine({ event, participantChamps, timestamp }) {
         </div>
       );
     }
+    return (
+      <div key={key} className="board-line">
+        unknown status
+      </div>
+    );
   });
 }

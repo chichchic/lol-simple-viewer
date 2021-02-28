@@ -21,7 +21,13 @@ function drawBuildings(ratio, buildingPosition, { current }) {
 
 function drawBuilding(building, ratio, lane, status) {
   return Object.keys(building).map((key) => {
-    if (!status[key]) return;
+    if (!status[key])
+      return (
+        <div
+          key={lane + key}
+          className={`destroyed-building ${lane} ${key}`}
+        ></div>
+      );
     const { x, y } = building[key];
     return (
       <div
