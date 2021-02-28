@@ -17,7 +17,7 @@ async function requestWithRiotToken(url, token, isRetry = false) {
     if (!reg.test(token)) {
       throw 403;
     }
-    url = `http://localhost:${serverPort}/${url}&token=${token}`;
+    url = `https://localhost:${serverPort}/${url}&token=${token}`;
     const res = await fetch(url);
 
     if (res.status === 429) {

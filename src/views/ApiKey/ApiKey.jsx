@@ -33,7 +33,7 @@ export default function ApiKey() {
         <p>You can get API-key in here :</p>
         <a href="https://developer.riotgames.com/">
           <img
-            src="http://localhost:3000/img/riotLogo.png"
+            src="https://localhost:3000/img/riotLogo.png"
             alt="riot developer"
           />
         </a>

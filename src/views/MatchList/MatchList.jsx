@@ -16,7 +16,7 @@ export default function MatchList() {
   const { name } = useParams();
 
   const [account, setAccount] = useState(null);
-  const [iconId, setIconId] = useState(null);
+  const [iconId, setIconId] = useState(1);
   const [level, setLevel] = useState(null);
   const [loading, setLoading] = useState(false);
   const [soloLeagueInfo, setSoloLeagueInfo] = useState({
