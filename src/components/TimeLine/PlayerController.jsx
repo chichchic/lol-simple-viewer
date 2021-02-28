@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import ProgressBar from './ProgressBar';
@@ -44,42 +44,36 @@ export default function PlayerController({ totalTime, curTime, setCurTime }) {
     isRunning ? delay : null,
   );
 
-  const curTimeController = useCallback(
-    (time) => {
-      if (controllerState === 2) {
-        setDelay(10);
-        setControllerState(0);
-      }
-      setCurTime(time);
-    },
-    [controllerState],
-  );
-
-  const onClickControllerButton = useCallback(() => {
-    setControllerState((oldVal) => {
-      if (oldVal === 0) {
-        setIsRunning(false);
-        return 1;
-      }
-      if (oldVal === 2) {
-        setCurTime(0);
-      }
-      setIsRunning(true);
-      return 0;
-    });
-  }, []);
   return (
     <div className="player-controller">
       <ProgressBar
         totalTime={totalTime}
         curTime={curTime}
         loadingTime={75}
-        curTimeController={curTimeController}
+        curTimeController={function curTimeController(time) {
+          if (controllerState === 2) {
+            setDelay(10);
+            setControllerState(0);
+          }
+          setCurTime(time);
+        }}
         setIsRunning={setIsRunning}
       />
       <ControllerButton
         controllerState={controllerState}
-        onClickControllerButton={onClickControllerButton}
+        onClickControllerButton={function onClickControllerButton() {
+          setControllerState((oldVal) => {
+            if (oldVal === 0) {
+              setIsRunning(false);
+              return 1;
+            }
+            if (oldVal === 2) {
+              setCurTime(0);
+            }
+            setIsRunning(true);
+            return 0;
+          });
+        }}
       />
     </div>
   );
