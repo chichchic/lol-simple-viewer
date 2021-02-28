@@ -14,6 +14,7 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 import './TimeLine.scss';
 
 function calcRespawn(deathtimeStamp, level) {
+  //NOTE: version2 에서 사용될 예정
   //ref: https://leagueoflegends.fandom.com/wiki/Death
   let BRW;
   if (level < 7) {

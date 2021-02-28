@@ -1,5 +1,3 @@
-import dragonJsonTypes from 'fixture/dragonJsonTypes';
-
 const init = { key: '' };
 
 export default function reducer(state = init, action) {

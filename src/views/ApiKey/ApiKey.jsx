@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import SummonerSearchBar from 'components/common/SummonerSearchBar';
 import TextLink from 'components/common/TextLink';
 import Button from 'components/common/Button';
 
@@ -22,7 +21,7 @@ export default function ApiKey() {
     if (key === '') {
       return;
     }
-    const token = localStorage.setItem('lol-token', key);
+    localStorage.setItem('lol-token', key);
     dispatch(setApiKey(key));
   }
   return (
