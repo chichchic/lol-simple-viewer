@@ -1,36 +1,41 @@
 const serverPort = 3000;
 
-function wait(time) {
-  alert(
-    `if it has too many requests in a short time, it will wait 2 min to request.`,
-  );
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve();
-    }, time);
-  });
-}
-
-async function requestWithRiotToken(url, token, isRetry = false) {
-  try {
-    const reg = /^[A-Za-z0-9-+]{42}$/;
-    if (!reg.test(token)) {
-      throw new Error(403);
-    }
-    url = `https://localhost:${serverPort}/${url}&token=${token}`;
-    const res = await fetch(url);
-
-    if (res.status === 429) {
-      await wait(2 * 60 * 1000);
-      return requestWithRiotToken(url, token, true);
-    }
-    if (!res.ok) {
-      throw new Error(res.status);
-    }
-    return res.json();
-  } catch (err) {
-    throw err;
+function requestWithRiotToken(url, token, isRetry = false) {
+  console.log('requestWithRiotToken', isRetry);
+  const reg = /^[A-Za-z0-9-+]{42}$/;
+  if (!reg.test(token)) {
+    throw new Error(403);
   }
+  const fullUrl = `https://localhost:${serverPort}/${url}&token=${token}`;
+  return fetch(fullUrl)
+    .then((res) => res.json())
+    .then(
+      //HACK: async await 구문으로 변경할것. res.json()이 제대로 동작하지 않는 오류로 인해 promise 구문을 사용함.
+      (res) =>
+        new Promise(function (resolve, reject) {
+          const { status } = JSON.parse(res);
+          if (!status) {
+            resolve(res);
+          } else if (!isRetry && status.status_code === 429) {
+            alert(
+              `it had too many requests in a short time. we need 2 min for the request.`,
+            );
+            setTimeout(() => {
+              resolve(requestWithRiotToken(url, token, true));
+            }, 2 * 60 * 1000);
+          } else if (status.status_code >= 400) {
+            reject(status.status_code);
+          } else {
+            resolve(res);
+          }
+        }),
+    )
+    .catch((err) => {
+      if (err === 429) {
+      } else {
+        throw err;
+      }
+    });
 }
 
 export async function getLeagueInfo(id, token) {
