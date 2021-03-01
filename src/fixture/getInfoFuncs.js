@@ -1,7 +1,6 @@
 const serverPort = 3000;
 
 function requestWithRiotToken(url, token, isRetry = false) {
-  console.log('requestWithRiotToken', isRetry);
   const reg = /^[A-Za-z0-9-+]{42}$/;
   if (!reg.test(token)) {
     throw new Error(403);
