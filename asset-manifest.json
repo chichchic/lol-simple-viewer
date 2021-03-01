@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/lol-simple-viewer/static/css/main.f08ddb19.chunk.css",
-    "main.js": "/lol-simple-viewer/static/js/main.cca73d5f.chunk.js",
-    "main.js.map": "/lol-simple-viewer/static/js/main.cca73d5f.chunk.js.map",
+    "main.css": "/lol-simple-viewer/static/css/main.6dd71aae.chunk.css",
+    "main.js": "/lol-simple-viewer/static/js/main.5267b85e.chunk.js",
+    "main.js.map": "/lol-simple-viewer/static/js/main.5267b85e.chunk.js.map",
     "runtime-main.js": "/lol-simple-viewer/static/js/runtime-main.ea904209.js",
     "runtime-main.js.map": "/lol-simple-viewer/static/js/runtime-main.ea904209.js.map",
     "static/js/2.898ad46a.chunk.js": "/lol-simple-viewer/static/js/2.898ad46a.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.ca46660b.chunk.js": "/lol-simple-viewer/static/js/3.ca46660b.chunk.js",
     "static/js/3.ca46660b.chunk.js.map": "/lol-simple-viewer/static/js/3.ca46660b.chunk.js.map",
     "index.html": "/lol-simple-viewer/index.html",
-    "static/css/main.f08ddb19.chunk.css.map": "/lol-simple-viewer/static/css/main.f08ddb19.chunk.css.map",
+    "static/css/main.6dd71aae.chunk.css.map": "/lol-simple-viewer/static/css/main.6dd71aae.chunk.css.map",
     "static/js/2.898ad46a.chunk.js.LICENSE.txt": "/lol-simple-viewer/static/js/2.898ad46a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ea904209.js",
     "static/js/2.898ad46a.chunk.js",
-    "static/css/main.f08ddb19.chunk.css",
-    "static/js/main.cca73d5f.chunk.js"
+    "static/css/main.6dd71aae.chunk.css",
+    "static/js/main.5267b85e.chunk.js"
   ]
 }
